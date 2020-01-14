@@ -1,0 +1,30 @@
+{
+  "name": "jogglereact",
+  "version": "1.0.0",
+  "description": "create full stack react app with server and auth on heroku",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix joggle",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "joggle": "npm start --prefix joggle",
+    "dev": "concurrently \"npm run server\" \"npm run joggle\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix joggle && npm run build -- prefix joggle"
+  },
+  "author": "Steven Bowler",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/joi": "^17.0.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
