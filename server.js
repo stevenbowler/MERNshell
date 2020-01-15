@@ -16,7 +16,6 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //Import routes
-app.use('/api/movies', postsRoute);
 app.use('/api/users', usersRoute);
 app.use('/api/games', gamesRoute);
 
