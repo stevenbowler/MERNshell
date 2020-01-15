@@ -1,6 +1,9 @@
 {
   "name": "jogglereact",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.13.0"
+  },
   "description": "create full stack react app with server and auth on heroku",
   "main": "server.js",
   "scripts": {
