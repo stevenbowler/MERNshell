@@ -238,9 +238,9 @@ class App extends React.Component {
       console.log("handleLogin this.token = tokenHandleLogin" + this.token);
       this.email = data.email;
       this.password = data.password;
-      this.setState({ loggedIn: true });
       this.setState({ name: nameHandleLogin }); // will display name on Navbar
       this.handleToggleLoginModal();
+      this.setState({ loggedIn: true });
       //console.log(" token .finally outside of Axios: " + tokenHandleLogin + " this.token: " + this.token);
     }
     const loginObject = axios
