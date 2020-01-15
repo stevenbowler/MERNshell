@@ -4,7 +4,7 @@
   "description": "create full stack react app with server and auth on heroku",
   "main": "server.js",
   "scripts": {
-    "client-install": "npm install --prefix joggle",
+    "joggle-install": "npm install --prefix joggle",
     "start": "node server.js",
     "server": "nodemon server.js",
     "joggle": "npm start --prefix joggle",
