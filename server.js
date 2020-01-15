@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 require('dotenv/config');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const postsRoute = require('./routes/posts');
 const usersRoute = require('./routes/users');
 const gamesRoute = require('./routes/games');
 const path = require('path');
