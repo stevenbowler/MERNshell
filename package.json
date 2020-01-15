@@ -9,7 +9,7 @@
     "server": "nodemon server.js",
     "joggle": "npm start --prefix joggle",
     "dev": "concurrently \"npm run server\" \"npm run joggle\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix joggle && npm run build -- prefix joggle"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix joggle && npm run build --prefix joggle"
   },
   "author": "Steven Bowler",
   "license": "MIT",
