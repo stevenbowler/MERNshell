@@ -1,3 +1,27 @@
+# jogglereact
+
+Full Stack MERN game app with login validation, password encryption and JSON web token protection.  
+
+
+### Overview
+
+Packages used include: [@hapi/joi](https://www.npmjs.com/package/@hapi/joi), [bcryptjs](https://www.npmjs.com/package/bcryptjs), [body-parser](https://www.npmjs.com/package/body-parser), [concurrently](https://www.npmjs.com/package/concurrently), [cors](https://www.npmjs.com/package/cors), [dotenv](https://www.npmjs.com/package/dotenv), [express](https://www.npmjs.com/package/express), [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), [mongoose](https://www.npmjs.com/package/mongoose).
+
+
+### User Documentation
+
+First, watch the video tutorial by clicking [this link](https://drive.google.com/file/d/1Vs6C1D5x1UoC_ONTekmDN3j9wV3LmicJ/view).
+
+Then play Joggle React by [clicking here](https://calm-brook-76441.herokuapp.com/).
+
+The game starts by touching a left/right/up/down button on the screen or, if on a laptop use the keys.
+
+Guests can play game any time; however, by providing a valid email and password the player game results will stored and top 5 scores will be shown to all.
+
+### Program Documentation
+
+Program is deployed to [Heroku](https://www.heroku.com).  Program uses [concurrently](https://www.npmjs.com/package/concurrently), so locally runs server on port 5000 and react app on port 3000.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
