@@ -1,0 +1,35 @@
+.clickyImage {
+    position: relative;
+    float: left;
+    height: 20%;
+    width: 20%;
+    min-width: 200px !important;
+    min-height: 100px !important;
+    /* max-width: 125px; */
+    max-height: 175px !important;
+    padding: 15;
+    margin: 15;
+    border: 1;
+}
+
+  
+  .clickyImage:link {
+    color: black;
+  }
+  
+  /* visited link */
+  .clickyImage:visited {
+    color: green;
+  }
+  
+  /* mouse over link */
+  .clickyImage:hover {
+    color: red;
+    opacity: 0.9;
+  }
+  
+  /* selected link */
+  .clickyImage:active {
+    color: blue;
+  } 
+ 

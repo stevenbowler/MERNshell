@@ -4,7 +4,7 @@
   "engines": {
     "node": "13.1.0"
   },
-  "description": "create full stack react app with server and auth on heroku",
+  "description": "MERN app with JWT, bcrypt and hapi/joi validation deployed to heroku",
   "main": "server.js",
   "scripts": {
     "joggle-install": "npm install --prefix joggle",

@@ -4,33 +4,11 @@ import axios from 'axios';
 import './App.css';
 import Box from './components/Box';
 import { Container } from 'reactstrap';
-import Buttons from './components/Buttons';
 import AppNavbar from './components/AppNavbar';
 import LoginRegisterModals from './components/LoginRegisterModals';
 import LeaderBoardModal from './components/LeaderBoardModal';
-import BlackBox from './components/BlackBox';
-import FuelThief from './components/FuelThief';
-import FuelTank from './components/FuelTank';
-//ar { handleGamesScores, getUserPersonalBest } = require('./functions/handleGamesData');
-//import { handleGamesPostGetScores, getUserPersonalBest } from './functions/handleGamesData';
 
 
-
-// To do Dec. 28, 2019:  Game updates required
-//        change NavBar Start and EndGame buttons to Login and Register (DONE Jan. 7)
-//        add login and register (DONE Jan. 7)
-//        add handling best ever score and personal best score from MongoDB
-//        display the hamburger? (DONE Jan. 7.  added image)
-//        halt timers if not gameOn
-//        if fuel remaining at endOfGame then add to score
-//        if grow or shrink box then adjust scoring
-//        conditional rendering on blackBox for different levels, states
-//        update colors on container and "blue" button on NavBar to do something better
-//        on reset game locates fuelThief on top of blackBox, takes fuel before game start, start at less than 100%
-//        clean up unused files and images
-//        study and maybe enlarge center buttons on screen for phone ergonomics?
-//        handleRight/Left/Up/Down do they need forceUpdate callback?
-//        document
 //
 //  To do Jan. 10, 2020: User Authorization updates required
 //        handleLogin if login not authorized leaves loginModal fields green on retry (Done Jan. 10)
@@ -41,16 +19,15 @@ import FuelTank from './components/FuelTank';
 //          
 
 
-const parsePX = (pxString) => Number(pxString.slice(pxString, -2, 2)); // parse out "px" return integer
+// const parsePX = (pxString) => Number(pxString.slice(pxString, -2, 2)); // parse out "px" return integer
 const parseS = (sString) => Number(sString.slice(sString, -1, 1));     // parse out "s" return integer
 const boxFactor = "50px";           //Box Width Height Growth Factor
-const blackBoxMoveFactor = "50px";  //Black Box Move Factor
-const maxLevelTimer = 6;           //seconds per level
+// const maxLevelTimer = 6;           //seconds per level
 const maxLevel = 20;                // handleEndGame after finishing this level
 const originalFuelThiefTransition = "15s";
-const levelTransitionFactor = 0.85;    // reduce transitionDuration for each new level
-const blackBoxHitFuelReduction = 12;  // fuel units reduced when fuelThief hits blackBox
-const fuelTankHitFuelIncrease = 8;    // fuel units increased when blackBox hits fuelTank
+document.body.style = 'background: black;';
+// Or with CSS
+// document.body.classList.add('background-red');
 
 
 class App extends React.Component {
@@ -77,12 +54,10 @@ class App extends React.Component {
       bestLevelName: 0
     };
     this.state = {
-      height: "350px",
-      width: "350px",
-      backgroundColor: "#bf5700",   // from brand.utexas.edu
-      grow: "true",
-      blackBoxMarginLeft: "0px",
-      blackBoxMarginTop: "0px",
+      height: "60%",                // Box height
+      width: "100%",                 // Box width
+      backgroundColor: "black",   // "#bf5700" Box color, from brand.utexas.edu
+      grow: "true",                 // currently disabled grow shrink
       isOpenNavBar: false,
       isOpenLoginModal: false,
       isOpenRegisterModal: false,
@@ -92,7 +67,6 @@ class App extends React.Component {
       loggedIn: false,
       finalScore: 0,
       finalLevel: 0
-
     };
   }
 
@@ -103,44 +77,18 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!this.state.gameOn && this.timerOn) {
-      clearInterval(this.timerID);
-      this.timerOn = false;
-    }
-
-    if (this.state.gameOn && !this.timerOn) {
-      this.timerID = setInterval(
-        () => this.gameUpdate(),
-        1000);
-      this.timerOn = true;
-    }
 
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerID);
   }
 
   // called from lifecycle methods
   gameUpdate = () => {
-    console.log("gameUpdate gameOn: " + this.state.gameOn);
-    if (this.state.gameOn) {
-      console.log("levelTimer before: " + this.levelTimer);
-      ++this.levelTimer;
-      console.log("levelTimer after: " + this.levelTimer);
-      if (this.levelTimer >= maxLevelTimer) this.newLevel();
-      if (this.level > maxLevel) this.handleEndGame();
-      this.score = this.score + this.level;
-    }
+    console.log("gameUpdate gameOn: ");
+
   }
 
-  // called from lifecycle methods gameUpdate, set parameters for new game level.
-  newLevel = () => {
-    this.fuelThiefTransition =
-      (parseS(this.fuelThiefTransition) * levelTransitionFactor).toString() + "s";
-    ++this.level;
-    this.levelTimer = 0;
-  }
 
 
   // STATE HANDLERS and related support functions FROM COMPONENTS
@@ -175,25 +123,6 @@ class App extends React.Component {
   }
 
 
-  // called from Buttons to handle BlackBox position changes
-  handleRight = () => this.setState({ blackBoxMarginLeft: this.newMargin(this.state.blackBoxMarginLeft, blackBoxMoveFactor, "right") }, this.forceUpdate());
-  handleLeft = () => this.setState({ blackBoxMarginLeft: this.newMargin(this.state.blackBoxMarginLeft, "-" + blackBoxMoveFactor, "left") }, this.forceUpdate());
-  handleUp = () => this.setState({ blackBoxMarginTop: this.newMargin(this.state.blackBoxMarginTop, "-" + blackBoxMoveFactor, "up") }, this.forceUpdate());
-  handleDown = () => this.setState({ blackBoxMarginTop: this.newMargin(this.state.blackBoxMarginTop, blackBoxMoveFactor, "down") }, this.forceUpdate());
-
-  // this sets new margins Left or Top for BlackBox, only called from handle Right, Left, Up, Down to setState of margins
-  newMargin = (currentPosition, factor, direction) => {
-    const newPosition = parsePX(currentPosition) + parsePX(factor);
-    switch (direction) {
-      case "right": if (newPosition >= parsePX(this.state.width)) return currentPosition; break;
-      case "left": if (newPosition <= 0) return "0px"; break;
-      case "up": if (newPosition <= 0) return "0px"; break;
-      case "down": if (newPosition >= parsePX(this.state.height)) return currentPosition; break;
-      default: break;
-    }
-    if (!this.state.isOpenNavBar && !this.state.gameOn) this.setState({ gameOn: true });
-    return (parsePX(currentPosition) + parsePX(factor)).toString() + "px";
-  }
 
   // called from LoginRegisterModals component to handle registration request attribute changes
   handleRegister = (data) => {
@@ -243,7 +172,8 @@ class App extends React.Component {
       this.setState({ loggedIn: true });
       //console.log(" token .finally outside of Axios: " + tokenHandleLogin + " this.token: " + this.token);
     }
-    const loginObject = axios
+    // const loginObject = // removed due to wasn't used (yet)
+    axios
       .post(
         '/api/users/login',
         {
@@ -280,66 +210,30 @@ class App extends React.Component {
 
 
   handleEndGame = () => {
-    this.setState({ finalScore: this.score + this.fuel });
-    this.setState({ finalLevel: this.level });
-    console.log("just before handleGamesPostThisScore, token: " + this.token + "email: " + this.email);
-    console.log("Final Score: " + this.state.finalScore + "Final Level: " + this.state.finalLevel);
-    //console.log("gamesData.bestScore: " + gamesData + "  gamesData.userBestScore: " + gamesData);
-    this.handleToggleLeaderBoardModal();
-    // reset all variables for new game
-    this.setState({ blackBoxMarginLeft: "0px" });
-    this.setState({ blackBoxMarginTop: "0px" }, () => this.setState({ gameOn: false }));
-    this.level = 1;
-    this.score = 0;
-    this.levelTimer = 0;
-    this.fuel = 100;
-    this.fuelThiefTransition = originalFuelThiefTransition;
-    this.forceUpdate();
+
   }
 
 
   handleChangeColor = () => this.setState({ backgroundColor: "blue" });
-  handleGrow = () => this.setState({ grow: "true" }, () => this.changeSize());
-  handleShrink = () => this.setState({ grow: "false" }, () => this.changeSize());
+  handleGrow = () => this.changeSize();
+  handleShrink = () => this.changeSize();
 
   // grow or shrink the Box with + or - factor value
   changeSize = () => {
-    let boxWidth, newBoxWidth, factor;
-    factor = boxFactor;
-    if (this.state.grow === "false") factor = "-" + factor;
-    boxWidth = this.state.width;
-    newBoxWidth = (parsePX(boxWidth) + parsePX(factor)).toString() + "px";
-    this.setState({
-      height: newBoxWidth,
-      width: newBoxWidth
-    }, () => this.moveBlackBox());
+    console.log("changeSize doesn't do anything anymore");
   }
 
-  // if shrink ing Box then check that BlackBox still inside Box, move blackBox up and left if required
-  moveBlackBox = () => {
-    if (parsePX(this.state.blackBoxMarginLeft) >= parsePX(this.state.width)) this.handleLeft();
-    if (parsePX(this.state.blackBoxMarginTop) >= parsePX(this.state.height)) this.handleUp();
-  }
 
   // if fuelThief Hits BlackBox, currently managed in fuelThief, and handled below in handleBlackBoxHit
   handleTouch = () => {
 
   }
 
-  // Called back from FuelThief once fuelThief location reset for next round
-  handleBlackBoxHit = () => {
-    this.fuel = this.fuel - blackBoxHitFuelReduction; //const blackBoxHitFuelReduction = 11;
-    if (this.fuel <= 0) this.handleEndGame();
-  }
-
-  handleFuelTankHit = () => {
-    this.fuel = this.fuel + fuelTankHitFuelIncrease; //const fuelTankHitFuelIncrease = 9;
-  }
 
 
   render() {
     return (
-      <div className="App" >
+      <div className="App">
         <AppNavbar
           name={this.state.name}
           loggedIn={this.state.loggedIn}
@@ -382,40 +276,6 @@ class App extends React.Component {
             width={this.state.width}
             backgroundColor={this.state.backgroundColor}
             fontSize={this.state.fontSize}
-          />
-          <BlackBox
-            marginLeft={this.state.blackBoxMarginLeft}
-            marginTop={this.state.blackBoxMarginTop}
-            fuel={this.fuel}
-            score={this.score}
-            level={this.level}
-          />
-          <Buttons
-            marginTop={this.state.height}
-            onRight={this.handleRight}
-            onLeft={this.handleLeft}
-            onUp={this.handleUp}
-            onDown={this.handleDown}
-            isOpenLeaderBoardModal={this.state.isOpenLeaderBoardModal}
-            isOpenRegisterModal={this.state.isOpenRegisterModal}
-            isOpenNavBar={this.state.isOpenNavBar}
-          />
-          <FuelThief
-            boxHeight={this.state.height}
-            boxWidth={this.state.width}
-            blackBoxLeft={this.state.blackBoxMarginLeft}
-            blackBoxTop={this.state.blackBoxMarginTop}
-            gameOn={this.state.gameOn}
-            onBlackBoxHit={this.handleBlackBoxHit}
-            transition={this.fuelThiefTransition}
-          />
-          <FuelTank
-            boxHeight={this.state.height}
-            boxWidth={this.state.width}
-            blackBoxLeft={this.state.blackBoxMarginLeft}
-            blackBoxTop={this.state.blackBoxMarginTop}
-            gameOn={this.state.gameOn}
-            onFuelTankHit={this.handleFuelTankHit}
           />
         </Container>
       </div>

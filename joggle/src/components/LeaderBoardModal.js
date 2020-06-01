@@ -4,13 +4,12 @@ import {
     Form,
     FormGroup,
     Label,
-    Input,
     FormText,
     Col,
     Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 import axios from 'axios';
-import { cleanup } from '@testing-library/react';
+// import { cleanup } from '@testing-library/react';
 
 //const { passwordValidation, emailValidation, nameValidation } = require('../validation/validationNameEmailPassword');
 

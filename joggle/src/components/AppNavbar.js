@@ -15,10 +15,10 @@ import {
 
 
 class AppNavbar extends Component {
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
 
-    }
+    // }
 
     toggleModal = () => this.modal = !this.modal;
 
@@ -46,7 +46,7 @@ class AppNavbar extends Component {
             <div>
                 <Navbar color="dark" expand="sm" className="mb-5">
                     <Container>
-                        <NavbarBrand href="/">JoggleReact</NavbarBrand>
+                        <NavbarBrand href="/">Clicky One</NavbarBrand>
                         <NavbarText className="text-warning" placeholder="test">{this.props.name}</ NavbarText>
                         <NavbarToggler color="dark" border="dark" onClick={this.toggle}><img src='hamburger.jpg' alt='Menu' style={{
                             height: "40px",

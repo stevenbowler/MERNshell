@@ -1,0 +1,19 @@
+p {
+  color: white;
+}
+
+.composerName {
+  color: blue;
+}
+
+.currentScore {
+  color: red;
+
+}
+.lastGameScore {
+  color: green;
+}
+
+.bestGameScore {
+  color:yellow;
+}
