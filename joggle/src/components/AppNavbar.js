@@ -37,8 +37,8 @@ class AppNavbar extends Component {
     login = () => this.props.onLogin();
     logout = () => this.props.onLogout();
     leaderBoard = () => this.props.onLeaderBoard();
-    grow = () => this.props.onGrow();
-    shrink = () => this.props.onShrink();
+    tutorial = () => this.props.onTutorial();
+    unused = () => this.props.unused();
     changeColor = () => this.props.onChangeColor();
 
     render() {
@@ -58,8 +58,8 @@ class AppNavbar extends Component {
                                 <Button hidden={this.props.loggedIn ? true : false} float="left" display="inline" onClick={this.login}>Login</Button>
                                 <Button hidden={this.props.loggedIn ? false : true} float="left" display="inline" onClick={this.logout}>Logout</Button>
                                 <Button hidden={this.props.loggedIn ? false : true} float="left" display="inline" onClick={this.leaderBoard}>Leader Board</Button>
-                                <Button float="left" display="inline" onClick={this.grow}>Grow</Button>
-                                <Button float="left" display="inline" onClick={this.shrink}>Shrink</Button>
+                                <Button hidden={this.props.loggedIn ? true : false} float="left" display="inline" onClick={this.tutorial}>Tutorial</Button>
+                                {/* <Button float="left" display="inline" onClick={this.unused}>Unused</Button> */}
                                 <Button float="left" type="color" display="inline" onClick={this.changeColor}>Color</Button>
                                 <NavItem>
                                     <NavLink display="inline" color="white" href="https://github.com/stevenbowler">GitHub</NavLink>

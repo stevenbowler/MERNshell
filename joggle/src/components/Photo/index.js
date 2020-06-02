@@ -19,16 +19,28 @@ class Photo extends React.Component {
 
     render() {
         return (
-            <div id={"photo" + this.props.id} style={{ transitionDuration: "1s" }}>
-                <button
-                    className="clickyImage btn btn-secondary"
-                    onClick={() => this.onClickImage(this.props.id)}  >
-                    <Media
-                        id={"image" + this.props.id}
-                        className="clickyImage"
-                        src={composers[this.props.id].image} />
-                </button>
-            </div >
+            <div>
+                <span
+                    id={"photo" + this.props.id}
+                    style={{ transitionDuration: "1s" }}>
+                    <button
+                        id={"button" + this.props.id}
+                        className="clickyImage btn btn-secondary"
+                        style={{
+                            padding: "10px",
+                            transitionDuration: "1s",
+                            top: this.props.top,
+                            left: this.props.left
+                            // background: composers[this.props.id].image  // looking for better alternative to border button
+                        }}
+                        onClick={() => this.onClickImage(this.props.id)}  >
+                        <Media
+                            id={"image" + this.props.id}
+                            className="clickyImage"
+                            src={composers[this.props.id].image} />
+                    </button>
+                </span >
+            </div>
         )
     }
 }

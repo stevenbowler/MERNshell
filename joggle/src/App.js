@@ -100,7 +100,9 @@ class App extends React.Component {
   }
 
   // handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
-  handleToggleLeaderBoardModal = () => {
+  handleToggleLeaderBoardModal = (userBestScore) => {
+    console.log("handleToggleLeaderBoard userBestScore:", userBestScore);
+    if (userBestScore > this.state.finalScore) this.setState({ finalScore: userBestScore });
     this.setState({ isOpenRegisterModal: false });
     this.setState({ isOpenLoginModal: false });
     this.setState({ isOpenLeaderBoardModal: !this.state.isOpenLeaderBoardModal });
@@ -159,12 +161,12 @@ class App extends React.Component {
     const finishLogin = () => {
       if (loginError) {
         this.setState({ name: "wrong email or pswd" }); // will display error message on Navbar
-        console.log(this.name);
+        // console.log(this.name);
         this.handleToggleLoginModal();
         return;
       }
       this.token = tokenHandleLogin;
-      console.log("handleLogin this.token = tokenHandleLogin" + this.token);
+      // console.log("handleLogin this.token = tokenHandleLogin" + this.token);
       this.email = data.email;
       this.password = data.password;
       this.setState({ name: nameHandleLogin }); // will display name on Navbar
@@ -183,7 +185,7 @@ class App extends React.Component {
       .then(function (response) {
         tokenHandleLogin = response.data.token;
         nameHandleLogin = response.data.user.name;
-        console.log("app.js handleLogin tokenHandleLogin: " + tokenHandleLogin);
+        // console.log("app.js handleLogin tokenHandleLogin: " + tokenHandleLogin);
       })
       .catch(function (error) {
         //console.log("Steve Output, could not login from App.js: " + error);
@@ -214,20 +216,29 @@ class App extends React.Component {
   }
 
 
-  handleChangeColor = () => this.setState({ backgroundColor: "blue" });
-  handleGrow = () => this.changeSize();
-  handleShrink = () => this.changeSize();
+  handleChangeColor = () => {
+    var randomRed = Math.floor(Math.random() * 255);
+    var randomGreen = Math.floor(Math.random() * 255);
+    var randomBlue = Math.floor(Math.random() * 255);
+    document.body.style = `transition: background-color 10s;`
+    document.body.style = `background-color: rgb(${randomRed}, ${randomGreen}, ${randomBlue});`;
+    this.setState({ backgroundColor: `rgb(${randomRed}, ${randomGreen}, ${randomBlue})` });
+  }
+  handleTutorial = () => console.log("handleTutorial");
+  handleUnsued = () => console.log("handleUnused");
 
   // grow or shrink the Box with + or - factor value
   changeSize = () => {
     console.log("changeSize doesn't do anything anymore");
   }
 
-
-  // if fuelThief Hits BlackBox, currently managed in fuelThief, and handled below in handleBlackBoxHit
-  handleTouch = () => {
-
+  handleNewBestScore = (newBestScore) => {
+    console.log("newBestScore App.js line 227: ", newBestScore);
+    if (this.state.loggedIn && newBestScore > this.state.finalScore) this.setState({ finalScore: newBestScore });
+    if (this.state.loggedIn) this.handleToggleLeaderBoardModal();
+    else console.log("not logged in so didn't open top 5 modal with: ", newBestScore);
   }
+
 
 
 
@@ -244,8 +255,8 @@ class App extends React.Component {
           onLeaderBoard={this.handleToggleLeaderBoardModal}
           onEndGame={this.handleEndGame}
           onToggle={this.handleToggleNavbar}
-          onGrow={this.handleGrow}
-          onShrink={this.handleShrink}
+          onTutorial={this.handleTutorial}
+          onUnused={this.handleUnused}
           onChangeColor={this.handleChangeColor}
         />
         <LoginRegisterModals
@@ -272,10 +283,13 @@ class App extends React.Component {
         <Container>
           <Box
             delta={boxFactor}
+            onNewBestScore={this.handleNewBestScore}
             height={this.state.height}
             width={this.state.width}
             backgroundColor={this.state.backgroundColor}
             fontSize={this.state.fontSize}
+            loggedIn={this.state.loggedIn}
+            score={this.state.finalScore}
           />
         </Container>
       </div>

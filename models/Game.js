@@ -26,5 +26,5 @@ const GameSchema = mongoose.Schema({
         default: Date.now
     }
 });
-
-module.exports = mongoose.model('Games', GameSchema);
+// replace 'Games' with your collection name
+module.exports = mongoose.model('Clickyones', GameSchema);

@@ -39,7 +39,6 @@ class LeaderBoardModal extends Component {
         this.previousLevel = 1;
     }
 
-    //this.bestScore = 440;
 
     componentDidMount() {
 
@@ -49,7 +48,8 @@ class LeaderBoardModal extends Component {
         //console.log("previous score: ", this.previousScore, "   this score: ", this.props.score, "  this level: ", this.props.level);
         if (this.props.loggedIn &&
             this.previousScore !== this.props.score) {
-            if (this.props.score !== 0 && this.props.level !== 0) this.postThisScore();
+            // console.log("component update leader modal");
+            if (this.props.score !== 0) this.postThisScore();
             this.getLeadersData();
             this.getUserPersonalBest();
             this.previousScore = this.props.score;
@@ -57,49 +57,37 @@ class LeaderBoardModal extends Component {
         }
     }
 
-    getUserPersonalBest = function () {
-        var temp = "";
+    getUserPersonalBest = () => {
+        var temp = 0;
         const loggedIn = this.props.loggedIn;
         const setLeaderBoardUserBest = () => {
             this.userBestScore = temp.data[0].score;
-            this.userBestLevel = temp.data[0].level;
+            // console.log("line64 this.userBestScore: ", this.userBestScore);
+            // this.userBestLevel = temp.data[0].level;
         }
         const logout = () => this.logout();
         var path = '/api/games/best?email=' + this.props.email;
-        //console.log("path:  ", path);
+        // console.log("path:  ", path);
+
         axios
             .get(
                 path,
                 {
                     headers: { 'auth-token': this.props.token },
-
                 })
             .then(function (response) {
-                //console.log("getUserPersonalBest axios post:  " + response);
-                temp = response;
-                //console.log("this.userName axios loaded OK: " + temp.data[0].score);
-                setLeaderBoardUserBest();
-
-
-                //console.log("this.userName axios loaded OK: " + temp2);
-
+                temp = response;    //save response to raise it up in temp
+                setLeaderBoardUserBest();   // set userBest to raise them up to component level
 
             })
             .catch(function (error) {
                 console.log("Steve Output, could not getUserStats from LeaderBoardModal.js: " + error.message);
                 if (loggedIn) logout();
-                //cleanUp();
-                // this.userBestScore = 0;
-                // this.userBestLevel = 0;
 
             })
-            // .finally(function () {
-            // }
 
-            // )
             ;
-        // console.log("holder: " + holder);
-        // return holder;
+
     }
 
     getLeadersData = () => {
@@ -107,8 +95,9 @@ class LeaderBoardModal extends Component {
         var leaderArray = "";
         const loggedIn = this.props.loggedIn;
         const logout = () => this.logout();
-        const setLeaderBoard = () => {
-            //console.log("leaderArray.data[0].score: " + leaderArray.data[0].score);
+        const setLeaderBoard = () => {                  // TODO NEED 5 DOCUMENTS IN COLLECTION OR WILL CATCH ERROR "DATA NOT FOUND"
+            // console.log("leaderArray.data[0].score: " + leaderArray.data[0].score);     // TODO CREATE HANDLER CHECK FOR undefined
+            // console.log("leaderArray.data[0].name: " + leaderArray.data[0].name);       // TODO IF undefined ASSIGN ZERO VALUE
             this.bestScoreName = leaderArray.data[0].name;
             this.bestScore = leaderArray.data[0].score;
             this.bestLevel = leaderArray.data[0].level;
@@ -131,20 +120,18 @@ class LeaderBoardModal extends Component {
                 '/api/games/leaders',
                 {
                     headers: { "auth-token": this.props.token },
-
                 })
             .then(function (response) {
-                //console.log(response);
+                // console.log("get leaders line 129", response);
                 leaderArray = response;
+                // console.log("get leaders line 129 leaderArray", leaderArray);
                 setLeaderBoard();
             })
             .catch(function (error) {
-                //console.log("Steve Output, could not getGamesLeaders from LeaderBoardModal.js: " + error.message);
+                console.log("Steve Output, could not getGamesLeaders from LeaderBoardModal.js: " + error.message);
                 if (loggedIn) logout();
-
             });
-        // .finally(function () {
-        // });
+
     }
 
 
@@ -171,8 +158,8 @@ class LeaderBoardModal extends Component {
 
             })
             .catch(function (error) {
-                // console.log("leaderBoardModal postThisScore, could not post score from App.js: " + error.message);
-                // console.log("leaderBoardModal postThisScore, could not post error.status: " + error.status);
+                console.log("leaderBoardModal postThisScore, could not post score from App.js: " + error.message);
+                console.log("leaderBoardModal postThisScore, could not post error.status: " + error.status);
                 // console.log("should log out now");
                 if (loggedIn) logout();
 
@@ -184,7 +171,7 @@ class LeaderBoardModal extends Component {
 
 
     cancel = () => {
-        this.props.onCancel();
+        this.props.onCancel(this.userBestScore);
     }
 
     logout = () => this.props.onLogout();
@@ -193,24 +180,24 @@ class LeaderBoardModal extends Component {
         return (
             <div>
                 <Modal isOpen={this.props.isOpenLeaderBoardModal} modalTransition={{ timeout: 700 }} backdropTransition={{ timeout: 1300 }} toggle={this.toggleModal} >
-                    <ModalHeader toggle={this.toggleModal}>Joggle All Time Best</ModalHeader>
+                    <ModalHeader toggle={this.toggleModal}>Clicky All Time Best</ModalHeader>
                     <ModalBody>
                         <Form >
                             <FormGroup>
-                                <Label for="BestScore" sm={20}>Top 5 All Time Best Jogglers:</Label>
+                                <Label for="BestScore" sm={20}>Top 5 All Time Best Clickers:</Label>
                                 <Col sm={100}>
 
                                     <FormText>
                                         <strong>{"1.  "}</strong>{this.props.loggedIn ? this.bestScoreName : "not logged in"}{": =>   Score: "}
-                                        <strong>{this.props.loggedIn ? this.bestScore : "Log In"}</strong>{": =>   Level: "}{this.props.loggedIn ? this.bestLevel : "Log In"}{<br></br>}
+                                        <strong>{this.props.loggedIn ? this.bestScore : "Log In"}</strong>{<br></br>}
                                         {"2.  "}{this.props.loggedIn ? this.secondBestScoreName : "not logged in"}{": =>   Score: "}
-                                        {this.props.loggedIn ? this.secondBestScore : "Log In"}{": =>   Level: "}{this.props.loggedIn ? this.secondBestLevel : "Log In"}{<br></br>}
+                                        {this.props.loggedIn ? this.secondBestScore : "Log In"}{<br></br>}
                                         {"3.  "}{this.props.loggedIn ? this.thirdBestScoreName : "not logged in"}{": =>   Score: "}
-                                        {this.props.loggedIn ? this.thirdBestScore : "Log In"}{": =>   Level: "}{this.props.loggedIn ? this.thirdBestLevel : "Log In"}{<br></br>}
+                                        {this.props.loggedIn ? this.thirdBestScore : "Log In"}{<br></br>}
                                         {"4.  "}{this.props.loggedIn ? this.forthBestScoreName : "not logged in"}{": =>   Score: "}
-                                        {this.props.loggedIn ? this.forthBestScore : "Log In"}{": =>   Level: "}{this.props.loggedIn ? this.forthBestLevel : "Log In"}{<br></br>}
+                                        {this.props.loggedIn ? this.forthBestScore : "Log In"}{<br></br>}
                                         {"5.  "}{this.props.loggedIn ? this.fifthBestScoreName : "not logged in"}{": =>   Score: "}
-                                        {this.props.loggedIn ? this.fifthBestScore : "Log In"}{": =>   Level: "}{this.props.loggedIn ? this.fifthBestLevel : "Log In"}{<br></br>}
+                                        {this.props.loggedIn ? this.fifthBestScore : "Log In"}{<br></br>}
                                     </FormText>
                                 </Col>
                             </FormGroup>
