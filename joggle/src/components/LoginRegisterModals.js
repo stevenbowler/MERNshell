@@ -33,7 +33,7 @@ class LoginRegisterModals extends Component {
     }
 
     handleSubmit = (event) => {
-        console.log("App.js handleSubmit logging in with: ", event.target.email.value);
+        // console.log("App.js handleSubmit logging in with: ", event.target.email.value);
         const data = {
             name: event.target.name.value,
             email: event.target.email.value,

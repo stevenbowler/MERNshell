@@ -33,16 +33,16 @@ class Box extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log("Box component update: ", this.state.gameScore === 0 && this.timerOn)
+        // console.log("Box component update: ", this.state.gameScore === 0 && this.timerOn)
         if (this.state.gameScore === 0 && this.timerOn) {  // if the game is not on then shut off the timer
-            console.log("turn timer off");
+            // console.log("turn timer off");
             clearInterval(this.timerID);
             this.timerOn = false;
         }
 
-        console.log("Box component update: game on but no timer: ", this.state.gameScore > 0 && !this.timerOn)
+        // console.log("Box component update: game on but no timer: ", this.state.gameScore > 0 && !this.timerOn)
         if (this.state.gameScore > 0 && !this.timerOn) {  //if gameOn and timerOff then turn timer on.
-            console.log("turning timer on");
+            // console.log("turning timer on");
             this.timerID = setInterval(
                 () => this.gameUpdate(),
                 2000);
@@ -57,7 +57,7 @@ class Box extends React.Component {
     }
 
     gameUpdate = () => {
-        console.log("this.scoreFactor", this.scoreFactor);
+        // console.log("this.scoreFactor", this.scoreFactor);
         if (this.scoreFactor > 5) --this.scoreFactor;
     }
 
@@ -96,14 +96,14 @@ class Box extends React.Component {
 
     // assign unique random numbers from 0 to 11 in the array to rearrange position of photos
     photoSequenceArrayShuffle = () => {
-        console.log("photoSequence");
+        // console.log("photoSequence");
 
         this.setPhotoSequenceArray();
-        console.log("Box photo sequenceShuffle Array: ", this.photoSequenceArray);
+        // console.log("Box photo sequenceShuffle Array: ", this.photoSequenceArray);
 
         // generate starting photo positions (then reassign top and left based on new sequence)
         this.setPhotoTopLeftArray();
-        console.log("this.photoTopLeftArray: ", this.photoTopLeftArray);
+        // console.log("this.photoTopLeftArray: ", this.photoTopLeftArray);
 
         this.composerArray = composers.map(composer =>
             // <Photo key={this.photoSequenceArray[composer.id]} {...composer} onChoosePhoto={this.handleChoosePhoto} />

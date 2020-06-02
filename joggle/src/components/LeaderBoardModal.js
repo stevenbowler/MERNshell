@@ -58,10 +58,13 @@ class LeaderBoardModal extends Component {
     }
 
     getUserPersonalBest = () => {
-        var temp = 0;
+        var temp;
+        // console.log("typeof temp: ", typeof temp);
         const loggedIn = this.props.loggedIn;
         const setLeaderBoardUserBest = () => {
-            this.userBestScore = temp.data[0].score;
+            // console.log("setLeaderBoardBest temp: ", temp);
+            if (temp !== undefined) this.userBestScore = temp.data[0].score;
+
             // console.log("line64 this.userBestScore: ", this.userBestScore);
             // this.userBestLevel = temp.data[0].level;
         }
@@ -76,7 +79,15 @@ class LeaderBoardModal extends Component {
                     headers: { 'auth-token': this.props.token },
                 })
             .then(function (response) {
-                temp = response;    //save response to raise it up in temp
+                if (response.data.length !== 0) {            // need to handle when empty array returned
+                    // console.log("response: ", response);
+                    temp = response;
+                    // console.log("temp: ", temp);
+                }    //save response to raise it up in temp
+                else {
+                    // temp = 0;
+                    // console.log("temp.data[0] ", temp.data[0].score);
+                }
                 setLeaderBoardUserBest();   // set userBest to raise them up to component level
 
             })
