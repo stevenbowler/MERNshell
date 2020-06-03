@@ -1,6 +1,6 @@
 # MERNshell
 
-Full Stack MERN shell with login validation, password encryption and JSON web token protection ready to go.  Copy in ReactJS app into client/src directory, link up your functionality by down props from client/App.js to your containers.  
+Full Stack MERN shell with login validation, password encryption and JSON web token protection ready to go.  Copy in ReactJS app into client/src directory, then set props to link up navbar and client/App.js functions to your containers.  
 
 
 ### Overview
@@ -14,7 +14,9 @@ This project has afforded this programmer the opportunity to gain experience in 
 
 First, watch the video tutorial by clicking [this link](https://drive.google.com/file/d/1JP_OVqQBgVvdr6Cqqd9xBg2_fPOLpMeB/view).
 
-Then to example deployed MERNshell by [clicking here](https://secure-citadel-76923.herokuapp.com/).
+Then see example MERNshell deployed by [clicking here](https://mernshell.herokuapp.com/).
+
+See another example of app fully deployed [clicking here](https://secure-citadel-76923.herokuapp.com/).
 
 
 
