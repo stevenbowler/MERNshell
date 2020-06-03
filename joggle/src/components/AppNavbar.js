@@ -62,7 +62,7 @@ class AppNavbar extends Component {
                                 {/* <Button float="left" display="inline" onClick={this.unused}>Unused</Button> */}
                                 <Button float="left" type="color" display="inline" onClick={this.changeColor}>Color</Button>
                                 <NavItem>
-                                    <NavLink display="inline" color="white" href="https://github.com/stevenbowler">GitHub</NavLink>
+                                    <NavLink display="inline" color="white" href="https://github.com/stevenbowler/ClickyOne">GitHub</NavLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>

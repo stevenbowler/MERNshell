@@ -227,7 +227,11 @@ class App extends React.Component {
     document.body.style = `background-color: rgb(${randomRed}, ${randomGreen}, ${randomBlue});`;
     this.setState({ backgroundColor: `rgb(${randomRed}, ${randomGreen}, ${randomBlue})` });
   }
-  handleTutorial = () => console.log("handleTutorial");
+  handleTutorial = () => {
+    console.log("handleTutorial");
+    window.location.href = "https://drive.google.com/file/d/1JP_OVqQBgVvdr6Cqqd9xBg2_fPOLpMeB/view";
+    // https://drive.google.com/file/d/1JP_OVqQBgVvdr6Cqqd9xBg2_fPOLpMeB/view
+  }
   handleUnsued = () => console.log("handleUnused");
 
   // grow or shrink the Box with + or - factor value
