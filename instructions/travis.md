@@ -20,13 +20,13 @@ In this activity we will set up the project repo with Travis CI to ensure that l
 
   * "Protect this branch"
 
-  * "Require pull request reviews before merging"
+  * "Require pull request reviews before merging"asdfa
 
-  * "Include administrators"
+  * "Include administrators"asd
 
-  * "Require status checks to pass before merging"
+  * "Require status checks to pass before merging"asdf
 
-  * "Require branches to be up to date before merging"
+  * "Require branches to be up to date before merging"asdf
 
 * Click "Save changes"
 
