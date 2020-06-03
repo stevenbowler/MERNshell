@@ -30,7 +30,8 @@ router.post('/register', async (req, res) => {
     });
     try {
         const savedUser = await user.save();
-        res.json(savedUser);
+        console.log("saved user: ", savedUser);
+        res.send(savedUser);
     } catch (err) {
         res.json({ message: err });
     }

@@ -44,7 +44,7 @@ class LoginRegisterModals extends Component {
             this.validName = false;
             this.validEmail = false;
             this.validPassword = false;
-            //event.preventDefault();
+            event.preventDefault();         // TODO register modal stays open with this
         }
         else if (this.validEmail && this.validPassword && this.props.isOpenLoginModal) {
             // console.log("handleSubmit Login with email: " + event.target.email.value + "password: " + event.target.password.value);

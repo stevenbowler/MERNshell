@@ -101,7 +101,7 @@ class App extends React.Component {
 
   // handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
   handleToggleLeaderBoardModal = (userBestScore) => {
-    console.log("handleToggleLeaderBoard userBestScore:", userBestScore);
+    // console.log("handleToggleLeaderBoard userBestScore:", userBestScore);
     if (userBestScore > this.state.finalScore) this.setState({ finalScore: userBestScore });
     this.setState({ isOpenRegisterModal: false });
     this.setState({ isOpenLoginModal: false });
@@ -128,7 +128,10 @@ class App extends React.Component {
 
   // called from LoginRegisterModals component to handle registration request attribute changes
   handleRegister = (data) => {
-    console.log("App.js handleRegister input name: " + data.name + "email: " + data.email + "password: " + data.password);
+    // console.log("App.js handleRegister input name: " + data.name + "email: " + data.email + "password: " + data.password);
+    var finishRegister = () => {
+      this.handleToggleLoginRegisterModal();
+    }
     axios
       .post(
         '/api/users/register',
@@ -138,18 +141,17 @@ class App extends React.Component {
           password: data.password
         })
       .then(function (response) {
-        console.log(response);
+        console.log("login post response: ", response);
         //this.handleLogin(loginData);    // should be able to log automatically in once registered OK
+        // this.handleToggleLoginRegisterModal();
       })
       .catch(function (error) {
         console.log(" Could not register from App.js: " + error.message);
       })
       .finally(function () {
-        // this.handleLogin({
-        //   email: data.email,
-        //   password: data.password
-        // });
-      });
+        finishRegister();
+      })
+      ;
   }
 
 
@@ -233,7 +235,7 @@ class App extends React.Component {
   }
 
   handleNewBestScore = (newBestScore) => {
-    console.log("newBestScore App.js line 227: ", newBestScore);
+    // console.log("newBestScore App.js line 227: ", newBestScore);
     if (this.state.loggedIn && newBestScore > this.state.finalScore) this.setState({ finalScore: newBestScore });
     if (this.state.loggedIn) this.handleToggleLeaderBoardModal();
     else console.log("not logged in so didn't open top 5 modal with: ", newBestScore);
