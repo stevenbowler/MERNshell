@@ -141,9 +141,8 @@ class App extends React.Component {
           password: data.password
         })
       .then(function (response) {
-        console.log("login post response: ", response);
-        //this.handleLogin(loginData);    // should be able to log automatically in once registered OK
-        // this.handleToggleLoginRegisterModal();
+        console.log(`register user: ${response.data.name} ${response.data.date}`);
+        //this.handleLogin(loginData);    // TODO should be able to log automatically in once registered OK
       })
       .catch(function (error) {
         console.log(" Could not register from App.js: " + error.message);
@@ -185,6 +184,7 @@ class App extends React.Component {
           password: data.password
         })
       .then(function (response) {
+        console.log(`login user: ${response.data.user.name}`);
         tokenHandleLogin = response.data.token;
         nameHandleLogin = response.data.user.name;
         // console.log("app.js handleLogin tokenHandleLogin: " + tokenHandleLogin);
@@ -203,6 +203,7 @@ class App extends React.Component {
 
 
   handleLogout = () => {
+    console.log(`logout: ${this.state.name}`);
     this.token = "";
     this.email = "";
     this.password = "";

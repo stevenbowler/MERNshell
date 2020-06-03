@@ -165,7 +165,7 @@ class LeaderBoardModal extends Component {
             }
         })
             .then(function (response) {
-                console.log("api/games/postscore response:  " + response);
+                console.log("game score saved:  ", response.data.name, response.data.score);
 
             })
             .catch(function (error) {

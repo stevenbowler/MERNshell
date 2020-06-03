@@ -145,7 +145,7 @@ class Box extends React.Component {
 
             if (this.props.loggedIn && this.bestGameScore <= this.props.score) {   // if this best < Mongo best
                 this.bestGameScore = this.props.score;                             //   then use Mongo best score
-                console.log("just set this.best.gameScore = this.props.score", this.props.score);
+                // console.log("just set this.best.gameScore = this.props.score", this.props.score);
             }
 
             if (this.lastGameScore >= this.bestGameScore) {
