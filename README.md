@@ -32,7 +32,7 @@ TOKEN_SECRET = any_random_string_but_always_use_same_string
 
 If you are going to deploy to Heroku then following `git push heroku master` command, and before accessing the app page, will be necesary to set the two environmental variables with these commands from the Heroku CLI:
 ````
-heroku config:set DB_CONNECTION=your_mongodb_url_with_embedded_username_password
+heroku config:set --app=mernshell DB_CONNECTION=your_mongodb_url_with_embedded_username_password
 heroku config:set TOKEN_SECRET = any_random_string_but_always_use_same_string
 ````
 
