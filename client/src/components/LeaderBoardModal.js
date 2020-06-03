@@ -9,9 +9,6 @@ import {
     Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 import axios from 'axios';
-// import { cleanup } from '@testing-library/react';
-
-//const { passwordValidation, emailValidation, nameValidation } = require('../validation/validationNameEmailPassword');
 
 
 class LeaderBoardModal extends Component {
@@ -191,11 +188,11 @@ class LeaderBoardModal extends Component {
         return (
             <div>
                 <Modal isOpen={this.props.isOpenLeaderBoardModal} modalTransition={{ timeout: 700 }} backdropTransition={{ timeout: 1300 }} toggle={this.toggleModal} >
-                    <ModalHeader toggle={this.toggleModal}>Clicky All Time Best</ModalHeader>
+                    <ModalHeader toggle={this.toggleModal}>Generic Modal with Mongo Data</ModalHeader>
                     <ModalBody>
                         <Form >
                             <FormGroup>
-                                <Label for="BestScore" sm={20}>Top 5 All Time Best Clickers:</Label>
+                                <Label for="BestScore" sm={20}>Top 5 All Time Best Data:</Label>
                                 <Col sm={100}>
 
                                     <FormText>
