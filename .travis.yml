@@ -1,0 +1,25 @@
+language: node_js
+node_js: "13"
+branches:
+  only:
+  - master
+services:
+#  - mysql
+notifications:
+  email:
+    recipients:
+    - stevenbowler@yahoo.com
+    on_success: always # fault: change
+    on_failure: always # default: always
+# before_install:
+#  - mysql -e 'CREATE DATABASE IF NOT EXISTS testdb;'
+cache:
+  directories:
+    - node_modules
+script:
+  - echo "hello world"
+#  - npm run lint
+#  - npm run testMocha  # currently will fail if route tests still included in canary.test.js, no mysql db
+# before_install:
+  # - mysql -e 'CREATE DATABASE testdb;'
+ 
