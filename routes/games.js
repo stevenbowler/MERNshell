@@ -1,3 +1,11 @@
+//@ts-nocheck
+/**@module
+ * @requires express
+ * @requires router
+ * @requires Game
+ * @requires verify
+ */
+
 const express = require('express');
 const router = express();
 const Game = require('../models/Game');

@@ -1,3 +1,6 @@
+//@ts-check --jsx
+/**@module  */
+
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';

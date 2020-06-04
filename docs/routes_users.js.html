@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: routes/users.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: routes/users.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//@ts-nocheck
+/**@module
+ * @requires express
+ * @requires router
+ * @requires bcryptjs
+ * @requires jwt
+ * @requires Game
+ * @requires verify
+ */
+
+const express = require('express');
+const router = express();
+const User = require('../models/User');
+const bcrypt = require('bcryptjs');
+const { registerValidation, loginValidation } = require('../validation');
+const jwt = require('jsonwebtoken');
+const verify = require('../privateRoutesAuth');
+
+
+
+/**
+ * Register a new user
+ * @function
+ * @name post/register
+ * @memberof module:routes/users
+ * @param {string} path - /register
+ * @returns {object}
+ */
+router.post('/register', async (req, res) => {
+    // validate before creating user
+    const { error } = registerValidation(req.body);
+    if (error) return res.status(406).json({ message: error.details[0].message, });
+
+    // check if user already in database
+    const emailExist = await User.findOne({ email: req.body.email });
+    if (emailExist) return res.status(400).send('email already exists');
+
+    // Hash password
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(req.body.password, salt);
+    console.log(hashedPassword);
+
+
+    const user = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: hashedPassword
+    });
+    try {
+        const savedUser = await user.save();
+        console.log("saved user: ", savedUser);
+        res.send(savedUser);
+    } catch (err) {
+        res.json({ message: err });
+    }
+});
+
+
+//Login a user
+/**
+ * Register a new user
+ * @function
+ * @name post/login
+ * @memberof module:routes/users
+ * @param {string} path - /login
+ * @returns {object}
+ */
+router.post('/login', async (req, res) => {
+    // validate login data before logging-in user
+    const { error } = loginValidation(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
+    // check if email already in database
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) return res.status(400).send({ "statusCode": 400, "statusMessage": "email does not exist" });
+
+    // check if password is correct
+    const validPassword = await bcrypt.compare(req.body.password, user.password); // true
+    if (!validPassword) return res.status(400).send('Invalid password');
+
+    //create and assign a token
+    const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, { expiresIn: 3600 });
+    console.log("login route token: " + token + " user: " + user);
+    res.header('auth-token', token).send({ "token": token, "user": user });
+
+});
+
+
+
+// get all users including handle query
+router.get('/', verify, async (req, res) => {
+    try {
+        const users = await User.find(req.query);  // will handle query ..api/movies?genre=horror etc
+        res.json(users);
+    } catch (err) {
+        res.json({ message: err });
+    }
+});
+
+
+
+/// get genre/:genreID is example route and parses params
+router.get('/genre/:genreID', async (req, res) => {
+    try {
+        const users = await User.find({ genre: req.params.genreID });
+        res.json(posts);
+    } catch (err) {
+        res.json({ message: err });
+    }
+});
+
+
+
+
+// get specific id
+router.get('/:postId', async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.postId);
+        res.json(post);
+    } catch (err) {
+        res.json(err);
+    }
+});
+
+
+//Delete specific id
+router.delete('/:postId', async (req, res) => {
+    try {
+        const removedPost = await Post.remove({ _id: req.params.postId });
+        res.json(removedPost);
+    } catch (err) {
+        res.json({ message: err });
+
+    }
+});
+
+
+//Update specific id
+router.patch('/:postId', async (req, res) => {
+    try {
+        const updatedPost = await Post.updateOne(
+            { _id: req.params.postId },
+            { $set: { title: req.body.title } },
+        );
+        res.json(updatedPost);
+    } catch (err) {
+        res.json({ message: err });
+    }
+});
+
+module.exports = router;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">MERNshell</a></h2><h3>Modules</h3><ul><li><a href="module-client_src_App.html">client/src/App</a></li><li><a href="module-client_src_components_AppNavbar.html">client/src/components/AppNavbar</a></li><li><a href="module-client_src_components_Box_index.html">client/src/components/Box/index</a></li><li><a href="module-client_src_components_LeaderBoardModal.html">client/src/components/LeaderBoardModal</a></li><li><a href="module-client_src_components_Photo_index.html">client/src/components/Photo/index</a></li><li><a href="module-models_Game.html">models/Game</a></li><li><a href="module-models_User.html">models/User</a></li><li><a href="module-privateRoutesAuth.html">privateRoutesAuth</a></li><li><a href="module-routes_games.html">routes/games</a></li><li><a href="module-routes_users.html">routes/users</a></li><li><a href="module-server.html">server</a></li><li><a href="module-validation.html">validation</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-models_Game-GameSchema.html">GameSchema</a></li><li><a href="module-models_User-UserSchema.html">UserSchema</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu Jun 04 2020 06:53:21 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

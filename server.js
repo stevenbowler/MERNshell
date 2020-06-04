@@ -1,3 +1,14 @@
+//@ts-check
+/**@module
+ * @requires express
+ * @requires mongoose
+ * @requires dotenv
+ * @requires bodyParser
+ * @requires cors
+ * @requires path
+ * @requires usersRoute
+ */
+
 //const Joi = require('@hapi/joi');
 const express = require('express');
 const app = express();
@@ -21,7 +32,6 @@ app.use('/api/games', gamesRoute);
 
 
 // connect to Mongo DB
-//  mongodb+srv://sbowler:sbowler@cluster0-z0lp4.gcp.mongodb.net/test?retryWrites=true&w=majority
 mongoose.connect(
     process.env.DB_CONNECTION,  // pull from .env file in react folder
     { useNewUrlParser: true, useUnifiedTopology: true },

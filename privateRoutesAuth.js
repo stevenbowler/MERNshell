@@ -1,3 +1,8 @@
+//@ts-nocheck
+/**@module
+ * @requires jst
+ */
+
 const jwt = require('jsonwebtoken');
 
 module.exports = function (req, res, next) {

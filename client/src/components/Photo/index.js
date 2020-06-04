@@ -1,3 +1,5 @@
+//@ts-check
+/**@module */
 import React from 'react';
 import {
     Media,
