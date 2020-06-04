@@ -226,7 +226,7 @@ class App extends React.Component {
    */
   handleTutorial = () => {
     console.log("handleTutorial");
-    window.location.href = "https://drive.google.com/file/d/1JP_OVqQBgVvdr6Cqqd9xBg2_fPOLpMeB/view";
+    window.location.href = "https://drive.google.com/file/d/1dXeXGydfJTvsE2GS7LnczJzTW0EKO-wS/view?usp=sharing";
   }
 
 

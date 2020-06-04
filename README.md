@@ -12,11 +12,52 @@ This project has afforded this programmer the opportunity to gain experience in 
 
 ### User Documentation
 
-First, watch the video tutorial by clicking [this link](https://drive.google.com/file/d/1JP_OVqQBgVvdr6Cqqd9xBg2_fPOLpMeB/view).
+1. Watch the video tutorial by clicking [this link](https://drive.google.com/file/d/1dXeXGydfJTvsE2GS7LnczJzTW0EKO-wS/view?usp=sharing). Then click [this link](https://drive.google.com/file/d/1_4N8HZdfe0iLeP5e1oFAKL5MQbadpiw6/view?usp=sharing).
 
-Then see example MERNshell deployed by [clicking here](https://mernshell.herokuapp.com/).
+2. See example MERNshell deployed by [clicking here](https://mernshell.herokuapp.com/).
 
-See another example of app fully deployed [clicking here](https://secure-citadel-76923.herokuapp.com/).
+3. See another example of app fully deployed [clicking here](https://secure-citadel-76923.herokuapp.com/).
+
+4. Open Git Bash follow enter these commands: 
+````
+$ mkdir clonedir
+$ cd clonedir
+$ git clone --bare https://github.com/stevenbowler/MERNshell.git
+$ cd MERNshell.git
+````
+5. Go to GitHub and open a new repository.
+6. Copy the Clone link from the repository (https://github.com/yourGitHubId/newRepository.git).
+7. Return to Git Bash and MERNshell.git directory.
+8. Enter the following commands from Git Bash:
+````
+$ git push --mirror https://github.com/yourGitHubId/newRepository.git
+$ cd ..
+$ rm -rf MERNshell.git
+$ cd ..
+$ rm -rf clondir
+````
+9. While in Git Bash, go to the directory where you want to clone down the newRepositoy.git enter this command:
+````
+$ git clone https://github.com/yourGitHubId/newRepository.git
+````
+10. Create a `.env` file in the directory of the new local repository.
+11. In `.env` file enter values for:
+    1. `DB_CONNECTION` which is your Mongo DB URL string complete with your authorized Mongo account and password.
+    2. `TOKEN_SECRET` unique random string that you chose, will be used to generate JSON Web Tokens.
+12. `.env` file should look like this:
+````
+DB_CONNECTION=your_mongodb_url_with_account_password_collection
+TOKEN_SECRET=your_unique_random_string
+````
+13. From Git Bash prompt local directory (master) enter the following:
+````
+$ npm install
+$ cd client
+$ npm install
+$ cd ..
+$ npm run dev
+````
+14. Check out localhost:3000 should look like [this](https://mernshell.herokuapp.com/).
 
 
 
