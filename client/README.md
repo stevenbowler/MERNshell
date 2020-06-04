@@ -1,6 +1,6 @@
-# jogglereact
+# Stick Your Client App Name Here
 
-Full Stack MERN game app with login validation, password encryption and JSON web token protection.  
+This is a shell for a ReactJS app, so you can put whatever you want here. 
 
 
 ### Overview
@@ -10,13 +10,7 @@ Packages used include: [@hapi/joi](https://www.npmjs.com/package/@hapi/joi), [bc
 
 ### User Documentation
 
-First, watch the video tutorial by clicking [this link](https://drive.google.com/file/d/1Vs6C1D5x1UoC_ONTekmDN3j9wV3LmicJ/view).
-
-Then play Joggle React by [clicking here](https://calm-brook-76441.herokuapp.com/).
-
-The game starts by touching a left/right/up/down button on the screen or, if on a laptop use the keys.
-
-Guests can play game any time; however, by providing a valid email and password the player game results will stored and top 5 scores will be shown to all.
+Stick whatever you feel is important to tell users right here.
 
 ### Program Documentation
 
