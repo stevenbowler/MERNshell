@@ -15,25 +15,11 @@ import {
 
 
 class AppNavbar extends Component {
-    // constructor(props) {
-    //     super(props);
-
-    // }
 
     toggleModal = () => this.modal = !this.modal;
-
-    registerInput = () => {
-        this.toggleModal();
-
-    }
-
-
+    registerInput = () => this.toggleModal();
     toggle = () => this.props.onToggle();
-
-    register = () => {
-        //const data = this.registerInput();
-        this.props.onRegister();
-    }
+    register = () => this.props.onRegister();
     login = () => this.props.onLogin();
     logout = () => this.props.onLogout();
     leaderBoard = () => this.props.onLeaderBoard();
