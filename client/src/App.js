@@ -12,6 +12,7 @@ import LeaderBoardModal from './components/LeaderBoardModal';
 
 
 // set background color below navbar
+//@ts-ignore
 document.body.style = 'background: black;';
 
 
@@ -179,6 +180,7 @@ class App extends React.Component {
     console.log(randomGreen);
     // document.body.style = `transition: background-color 10s;`
     // document.body.style = `background: green;`;
+    //@ts-ignore
     document.body.style = `background-color: rgb(${randomRed}, ${randomGreen}, ${randomBlue});`;
     this.setState({ backgroundColor: `rgb(${randomRed}, ${randomGreen}, ${randomBlue})` });
   }
