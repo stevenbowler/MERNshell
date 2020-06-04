@@ -1,5 +1,8 @@
 //@ts-check
-/**@module */
+/**@module 
+ * @requires react
+ * @requires reactstrap
+*/
 import React, { Component } from 'react';
 import {
     Collapse,
@@ -17,16 +20,56 @@ import {
 
 
 class AppNavbar extends Component {
-
+    /**
+     * Toggle the navbar modal variable
+     * @function toggleModal */
     toggleModal = () => this.modal = !this.modal;
+
+    /** 
+     * Unused
+     */
     registerInput = () => this.toggleModal();
+
+    /**
+     * Send back toggle signal to App.js, to open/close navbar
+     * @function toggle
+     */
     toggle = () => this.props.onToggle();
+
+    /**
+     * Onclick request to register
+     * @function register
+     */
     register = () => this.props.onRegister();
+
+    /**
+     * Onclick request to login
+     * @function login
+     */
     login = () => this.props.onLogin();
+
+    /**
+     * Onclick request to logout
+     * @function logout
+     */
     logout = () => this.props.onLogout();
+
+    /**
+     * Onclick toggle leaderboard
+     * @function leaderBoard
+     */
     leaderBoard = () => this.props.onLeaderBoard();
+
+    /**
+     * Onclick request tutorial video
+     * @function tutorial
+     */
     tutorial = () => this.props.onTutorial();
-    unused = () => this.props.unused();
+
+    /**
+     * Onclick request to change background color
+     * @function changeColor
+     */
     changeColor = () => this.props.onChangeColor();
 
     render() {

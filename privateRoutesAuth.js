@@ -1,13 +1,17 @@
 //@ts-nocheck
 /**@module
- * @requires jst
+ * @requires jwt
  */
 
 const jwt = require('jsonwebtoken');
 
+/**
+ * Middleware, checks header "auth-token" against JWT, if token OK proceed to next, else response=400
+ * @function
+ */
 module.exports = function (req, res, next) {
     const token = req.header('auth-token');
-    console.log("privateRoutesAuth.js token received from axios: ", token);
+    // console.log("privateRoutesAuth.js token received from axios: ", token);
     if (!token) return res.status(401).send('Access Denied');
 
     try {

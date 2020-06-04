@@ -58,7 +58,7 @@ router.post('/register', async (req, res) => {
 
 //Login a user
 /**
- * Register a new user
+ * Login a new user
  * @function
  * @name post/login
  * @memberof module:routes/users
@@ -80,7 +80,7 @@ router.post('/login', async (req, res) => {
 
     //create and assign a token
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, { expiresIn: 3600 });
-    console.log("login route token: " + token + " user: " + user);
+    // console.log("login route token: " + token + " user: " + user);
     res.header('auth-token', token).send({ "token": token, "user": user });
 
 });
@@ -100,6 +100,14 @@ router.get('/', verify, async (req, res) => {
 
 
 /// get genre/:genreID is example route and parses params
+/**
+ * Basic route that sends the user first to the index.handlebars page with all MySQL records displayed
+ * @function
+ * @name get/
+ * @memberof module:routes/users
+ * @param {string} path - / to get you home.
+ * @returns {URL} Returns url to index.handlebars
+ */
 router.get('/genre/:genreID', async (req, res) => {
     try {
         const users = await User.find({ genre: req.params.genreID });

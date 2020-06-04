@@ -27,7 +27,12 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>//@ts-check --jsx
-/**@module  */
+/**@module  
+ * @requires react
+ * @requires bootstrap
+ * @requires axios
+ * @requires reactstrap
+*/
 
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -40,6 +45,7 @@ import LeaderBoardModal from './components/LeaderBoardModal';
 
 
 // set background color below navbar
+//@ts-ignore
 document.body.style = 'background: black;';
 
 
@@ -82,14 +88,20 @@ class App extends React.Component {
 
   // STATE HANDLERS and related support functions FROM COMPONENTS
 
-  // handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
+  /**
+   * handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
+   * @function handleToggleNavbar
+   */
   handleToggleNavbar = () => {
     this.setState({ isOpenNavBar: !this.state.isOpenNavBar });
     if (this.state.isOpenNavBar) this.setState({ gameOn: false });
   }
 
 
-  // handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
+  /**
+   * handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
+   * @function handleToggleLeaderBoardModal
+   */
   handleToggleLeaderBoardModal = (userBestScore) => {
     // console.log("handleToggleLeaderBoard userBestScore:", userBestScore);
     if (userBestScore > this.state.finalScore) this.setState({ finalScore: userBestScore });
@@ -99,7 +111,11 @@ class App extends React.Component {
   }
 
 
-  // handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
+
+  /**
+   * handle state.isOpenNavBar toggle for ReactStrap AppNavBar
+   * @function handleToggleLoginRegisterModal
+   */
   handleToggleLoginRegisterModal = () => {
     this.setState({ isOpenRegisterModal: !this.state.isOpenRegisterModal });
     this.setState({ isOpenLoginModal: false });
@@ -107,15 +123,30 @@ class App extends React.Component {
   }
 
 
-  // handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
+  /**
+   * handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
+   * @function
+  */
   handleToggleLoginModal = () => {
     this.setState({ isOpenRegisterModal: !this.state.isOpenRegisterModal });
     this.setState({ isOpenLeaderBoardModal: false });
     this.setState({ isOpenLoginModal: !this.state.isOpenLoginModal });
   }
 
+  /**
+   * this is object with registration data
+   * @typedef {object} data
+   * @property {string} name - 8+ digit user name regex alpha-numeric
+   * @property {string} email - email format string
+   * @property {string} password - minimum 8 digit password regex alpha-numeric
+   * 
+  */
 
-  // called from LoginRegisterModals component to handle registration request attribute changes
+  /**
+   * called from LoginRegisterModals component to handle registration request attribute changes
+   * @function handleRegister
+   * @param {data} data 
+   * */
   handleRegister = (data) => {
     // console.log("App.js handleRegister input name: " + data.name + "email: " + data.email + "password: " + data.password);
     var finishRegister = () => {
@@ -142,7 +173,10 @@ class App extends React.Component {
       ;
   }
 
-
+  /**
+   * @function handleLogin
+   * @param {data} data
+   */
   handleLogin = (data) => {
     var tokenHandleLogin = "";
     var nameHandleLogin = "";
@@ -185,7 +219,10 @@ class App extends React.Component {
       });
   }
 
-
+  /**
+   * handle the logout event
+   * @function handleLogout
+   */
   handleLogout = () => {
     console.log(`logout: ${this.state.name}`);
     this.token = "";
@@ -193,29 +230,31 @@ class App extends React.Component {
     this.password = "";
     this.setState({ name: "Logged out" });
     this.setState({ loggedIn: false });
-    // this.setState({ finalScore: 0 });
-    // this.setState({ finalLevel: 0 });
   }
 
 
-
+  /**
+   * handle the Changecolor event from Navbar
+   * @function handleChangeColor
+   */
   handleChangeColor = () => {
     console.log("changeColor");
     var randomRed = Math.floor(Math.random() * 255);
     var randomGreen = Math.floor(Math.random() * 255);
     var randomBlue = Math.floor(Math.random() * 255);
     console.log(randomGreen);
-    // document.body.style = `transition: background-color 10s;`
-    // document.body.style = `background: green;`;
+    //@ts-ignore
     document.body.style = `background-color: rgb(${randomRed}, ${randomGreen}, ${randomBlue});`;
     this.setState({ backgroundColor: `rgb(${randomRed}, ${randomGreen}, ${randomBlue})` });
   }
 
-
+  /**
+   * handle the Tutorial button event, play the tutorial for this app
+   * @function handleTutorial
+   */
   handleTutorial = () => {
     console.log("handleTutorial");
     window.location.href = "https://drive.google.com/file/d/1JP_OVqQBgVvdr6Cqqd9xBg2_fPOLpMeB/view";
-    // https://drive.google.com/file/d/1JP_OVqQBgVvdr6Cqqd9xBg2_fPOLpMeB/view
   }
 
 
@@ -273,13 +312,13 @@ export default App;
 </div>
 
 <nav>
-    <h2><a href="index.html">MERNshell</a></h2><h3>Modules</h3><ul><li><a href="module-client_src_App.html">client/src/App</a></li><li><a href="module-client_src_components_AppNavbar.html">client/src/components/AppNavbar</a></li><li><a href="module-client_src_components_Box_index.html">client/src/components/Box/index</a></li><li><a href="module-client_src_components_LeaderBoardModal.html">client/src/components/LeaderBoardModal</a></li><li><a href="module-client_src_components_Photo_index.html">client/src/components/Photo/index</a></li><li><a href="module-models_Game.html">models/Game</a></li><li><a href="module-models_User.html">models/User</a></li><li><a href="module-privateRoutesAuth.html">privateRoutesAuth</a></li><li><a href="module-routes_games.html">routes/games</a></li><li><a href="module-routes_users.html">routes/users</a></li><li><a href="module-server.html">server</a></li><li><a href="module-validation.html">validation</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-models_Game-GameSchema.html">GameSchema</a></li><li><a href="module-models_User-UserSchema.html">UserSchema</a></li></ul>
+    <h2><a href="index.html">MERNshell</a></h2><h3>Modules</h3><ul><li><a href="module-client_src_App.html">client/src/App</a></li><li><a href="module-client_src_components_AppNavbar.html">client/src/components/AppNavbar</a></li><li><a href="module-client_src_components_LeaderBoardModal.html">client/src/components/LeaderBoardModal</a></li><li><a href="module-models_Game.html">models/Game</a></li><li><a href="module-models_User.html">models/User</a></li><li><a href="module-privateRoutesAuth.html">privateRoutesAuth</a></li><li><a href="module-routes_games.html">routes/games</a></li><li><a href="module-routes_users.html">routes/users</a></li><li><a href="module-server.html">server</a></li><li><a href="module-validation.html">validation</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-models_Game-GameSchema.html">GameSchema</a></li><li><a href="module-models_User-UserSchema.html">UserSchema</a></li><li><a href="module-validation-loginValidation.html">loginValidation</a></li><li><a href="module-validation-registerValidation.html">registerValidation</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu Jun 04 2020 06:53:21 GMT-0500 (Central Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu Jun 04 2020 11:21:29 GMT-0500 (Central Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

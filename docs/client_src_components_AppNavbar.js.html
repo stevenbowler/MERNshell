@@ -27,7 +27,10 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>//@ts-check
-/**@module */
+/**@module 
+ * @requires react
+ * @requires reactstrap
+*/
 import React, { Component } from 'react';
 import {
     Collapse,
@@ -45,48 +48,88 @@ import {
 
 
 class AppNavbar extends Component {
-
+    /**
+     * Toggle the navbar modal variable
+     * @function toggleModal */
     toggleModal = () => this.modal = !this.modal;
+
+    /** 
+     * Unused
+     */
     registerInput = () => this.toggleModal();
+
+    /**
+     * Send back toggle signal to App.js, to open/close navbar
+     * @function toggle
+     */
     toggle = () => this.props.onToggle();
+
+    /**
+     * Onclick request to register
+     * @function register
+     */
     register = () => this.props.onRegister();
+
+    /**
+     * Onclick request to login
+     * @function login
+     */
     login = () => this.props.onLogin();
+
+    /**
+     * Onclick request to logout
+     * @function logout
+     */
     logout = () => this.props.onLogout();
+
+    /**
+     * Onclick toggle leaderboard
+     * @function leaderBoard
+     */
     leaderBoard = () => this.props.onLeaderBoard();
+
+    /**
+     * Onclick request tutorial video
+     * @function tutorial
+     */
     tutorial = () => this.props.onTutorial();
-    unused = () => this.props.unused();
+
+    /**
+     * Onclick request to change background color
+     * @function changeColor
+     */
     changeColor = () => this.props.onChangeColor();
 
     render() {
         return (
-            &lt;div>
-                &lt;Navbar color="dark" expand="sm" className="mb-5">
-                    &lt;Container>
-                        &lt;NavbarBrand href="/">MERNshell&lt;/NavbarBrand>
-                        &lt;NavbarText className="text-warning" placeholder="test">{this.props.name}&lt;/ NavbarText>
-                        &lt;NavbarToggler color="dark" border="dark" onClick={this.toggle}>&lt;img src='hamburger.jpg' alt='Menu' style={{
-                            height: "40px",
-                            width: "40px"
-                        }}>&lt;/img>&lt;/NavbarToggler>
-                        &lt;Collapse isOpen={this.props.isOpen} navbar>
-                            &lt;Nav className="ml-auto" navbar>
-                                &lt;Button hidden={this.props.loggedIn ? true : false} float="left" display="inline" onClick={this.register}>Register&lt;/Button>
-                                &lt;Button hidden={this.props.loggedIn ? true : false} float="left" display="inline" onClick={this.login}>Login&lt;/Button>
-                                &lt;Button hidden={this.props.loggedIn ? false : true} float="left" display="inline" onClick={this.logout}>Logout&lt;/Button>
-                                &lt;Button hidden={this.props.loggedIn ? false : true} float="left" display="inline" onClick={this.leaderBoard}>Modal&lt;/Button>
-                                &lt;Button hidden={this.props.loggedIn ? true : false} float="left" display="inline" onClick={this.tutorial}>Tutorial&lt;/Button>
-                                {/* &lt;Button float="left" display="inline" onClick={this.unused}>Unused&lt;/Button> */}
-                                &lt;Button float="left" type="color" display="inline" onClick={this.changeColor}>Color&lt;/Button>
-                                &lt;NavItem>
-                                    &lt;NavLink display="inline" color="white" href="https://github.com/stevenbowler/MERNshell">GitHub&lt;/NavLink>
-                                &lt;/NavItem>
-                            &lt;/Nav>
-                        &lt;/Collapse>
-                    &lt;/Container>
+            // &lt;div> //removed to get sticky navbar with reactstrap https://github.com/reactstrap/reactstrap/issues/1179
+            &lt;Navbar color="dark" expand="sm" className="mb-5 sticky-top">
+                &lt;Container>
+                    &lt;NavbarBrand href="/">MERNshell&lt;/NavbarBrand>
+                    &lt;NavbarText className="text-warning" placeholder="test">{this.props.name}&lt;/ NavbarText>
+                    &lt;NavbarToggler color="dark" border="dark" onClick={this.toggle}>&lt;img src='hamburger.jpg' alt='Menu' style={{
+                        height: "40px",
+                        width: "40px"
+                    }}>&lt;/img>&lt;/NavbarToggler>
+                    &lt;Collapse isOpen={this.props.isOpen} navbar>
+                        &lt;Nav className="ml-auto" navbar>
+                            &lt;Button hidden={this.props.loggedIn ? true : false} float="left" display="inline" onClick={this.register}>Register&lt;/Button>
+                            &lt;Button hidden={this.props.loggedIn ? true : false} float="left" display="inline" onClick={this.login}>Login&lt;/Button>
+                            &lt;Button hidden={this.props.loggedIn ? false : true} float="left" display="inline" onClick={this.logout}>Logout&lt;/Button>
+                            &lt;Button hidden={this.props.loggedIn ? false : true} float="left" display="inline" onClick={this.leaderBoard}>Modal&lt;/Button>
+                            &lt;Button hidden={this.props.loggedIn ? true : false} float="left" display="inline" onClick={this.tutorial}>Tutorial&lt;/Button>
+                            {/* &lt;Button float="left" display="inline" onClick={this.unused}>Unused&lt;/Button> */}
+                            &lt;Button float="left" type="color" display="inline" onClick={this.changeColor}>Color&lt;/Button>
+                            &lt;NavItem>
+                                &lt;NavLink display="inline" color="white" href="https://github.com/stevenbowler/MERNshell">GitHub&lt;/NavLink>
+                            &lt;/NavItem>
+                        &lt;/Nav>
+                    &lt;/Collapse>
+                &lt;/Container>
 
-                &lt;/Navbar>
+            &lt;/Navbar>
 
-            &lt;/div >
+            // &lt;/div >  //removed to get sticky navbar with reactstrap https://github.com/reactstrap/reactstrap/issues/1179
         );
     }
 
@@ -102,13 +145,13 @@ export default AppNavbar;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">MERNshell</a></h2><h3>Modules</h3><ul><li><a href="module-client_src_App.html">client/src/App</a></li><li><a href="module-client_src_components_AppNavbar.html">client/src/components/AppNavbar</a></li><li><a href="module-client_src_components_Box_index.html">client/src/components/Box/index</a></li><li><a href="module-client_src_components_LeaderBoardModal.html">client/src/components/LeaderBoardModal</a></li><li><a href="module-client_src_components_Photo_index.html">client/src/components/Photo/index</a></li><li><a href="module-models_Game.html">models/Game</a></li><li><a href="module-models_User.html">models/User</a></li><li><a href="module-privateRoutesAuth.html">privateRoutesAuth</a></li><li><a href="module-routes_games.html">routes/games</a></li><li><a href="module-routes_users.html">routes/users</a></li><li><a href="module-server.html">server</a></li><li><a href="module-validation.html">validation</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-models_Game-GameSchema.html">GameSchema</a></li><li><a href="module-models_User-UserSchema.html">UserSchema</a></li></ul>
+    <h2><a href="index.html">MERNshell</a></h2><h3>Modules</h3><ul><li><a href="module-client_src_App.html">client/src/App</a></li><li><a href="module-client_src_components_AppNavbar.html">client/src/components/AppNavbar</a></li><li><a href="module-client_src_components_LeaderBoardModal.html">client/src/components/LeaderBoardModal</a></li><li><a href="module-models_Game.html">models/Game</a></li><li><a href="module-models_User.html">models/User</a></li><li><a href="module-privateRoutesAuth.html">privateRoutesAuth</a></li><li><a href="module-routes_games.html">routes/games</a></li><li><a href="module-routes_users.html">routes/users</a></li><li><a href="module-server.html">server</a></li><li><a href="module-validation.html">validation</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-models_Game-GameSchema.html">GameSchema</a></li><li><a href="module-models_User-UserSchema.html">UserSchema</a></li><li><a href="module-validation-loginValidation.html">loginValidation</a></li><li><a href="module-validation-registerValidation.html">registerValidation</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu Jun 04 2020 06:53:21 GMT-0500 (Central Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu Jun 04 2020 11:21:29 GMT-0500 (Central Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

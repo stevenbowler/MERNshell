@@ -71,6 +71,10 @@ class LeaderBoardModal extends Component {
 
     }
 
+    /**
+     * If logged-in and previousScore &lt;= currentScore then update leaders data and user personal best data
+     * @function componentDidUpdate
+     */
     componentDidUpdate() {
         //console.log("previous score: ", this.previousScore, "   this score: ", this.props.score, "  this level: ", this.props.level);
         if (this.props.loggedIn &amp;&amp;
@@ -84,6 +88,10 @@ class LeaderBoardModal extends Component {
         }
     }
 
+    /**
+     * Called from {@link componentDidUpdate}, get this users best score from MongoDB
+     * @function getUserPersonalBest
+     */
     getUserPersonalBest = () => {
         var temp;
         // console.log("typeof temp: ", typeof temp);
@@ -97,7 +105,6 @@ class LeaderBoardModal extends Component {
         }
         const logout = () => this.logout();
         var path = '/api/games/best?email=' + this.props.email;
-        // console.log("path:  ", path);
 
         axios
             .get(
@@ -107,7 +114,6 @@ class LeaderBoardModal extends Component {
                 })
             .then(function (response) {
                 if (response.data.length !== 0) {            // need to handle when empty array returned
-                    // console.log("response: ", response);
                     temp = response;
                     // console.log("temp: ", temp);
                 }    //save response to raise it up in temp
@@ -116,18 +122,18 @@ class LeaderBoardModal extends Component {
                     // console.log("temp.data[0] ", temp.data[0].score);
                 }
                 setLeaderBoardUserBest();   // set userBest to raise them up to component level
-
             })
             .catch(function (error) {
                 console.log("Steve Output, could not getUserStats from LeaderBoardModal.js: " + error.message);
                 if (loggedIn) logout();
-
             })
-
             ;
-
     }
 
+    /**
+     * Called from {@link componentDidUpdate} to get top 5 scores
+     * @function getLeadersData
+     */
     getLeadersData = () => {
         //console.log("App.js handleBestUpdate input name: " + data.name + "email: " + data.email + "password: " + data.password);
         var leaderArray = "";
@@ -161,6 +167,7 @@ class LeaderBoardModal extends Component {
                 })
             .then(function (response) {
                 // console.log("get leaders line 129", response);
+                //@ts-ignore
                 leaderArray = response;
                 // console.log("get leaders line 129 leaderArray", leaderArray);
                 setLeaderBoard();
@@ -173,6 +180,10 @@ class LeaderBoardModal extends Component {
     }
 
 
+
+    /**
+     * Called from {@link componentDidUpdate}, when game just completed, load new score to MongoDB
+     */
     postThisScore = () => {
         //console.log("LeaderBoardModal.js postThisScore this.props.token: " + this.props.token + " data email: " + this.props.email);
         const loggedIn = this.props.loggedIn;
@@ -207,11 +218,18 @@ class LeaderBoardModal extends Component {
 
 
 
-
+    /**
+     * Onclick Cancel button event, trigger onCancle and handleCancel in App.js
+     * @function cancel
+     */
     cancel = () => {
         this.props.onCancel(this.userBestScore);
     }
 
+    /**
+     * Called when invalid attempt, timed-out JWT, to access MongoDB
+     * @function logout
+     */
     logout = () => this.props.onLogout();
 
     render() {
@@ -283,13 +301,13 @@ export default LeaderBoardModal;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">MERNshell</a></h2><h3>Modules</h3><ul><li><a href="module-client_src_App.html">client/src/App</a></li><li><a href="module-client_src_components_AppNavbar.html">client/src/components/AppNavbar</a></li><li><a href="module-client_src_components_Box_index.html">client/src/components/Box/index</a></li><li><a href="module-client_src_components_LeaderBoardModal.html">client/src/components/LeaderBoardModal</a></li><li><a href="module-client_src_components_Photo_index.html">client/src/components/Photo/index</a></li><li><a href="module-models_Game.html">models/Game</a></li><li><a href="module-models_User.html">models/User</a></li><li><a href="module-privateRoutesAuth.html">privateRoutesAuth</a></li><li><a href="module-routes_games.html">routes/games</a></li><li><a href="module-routes_users.html">routes/users</a></li><li><a href="module-server.html">server</a></li><li><a href="module-validation.html">validation</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-models_Game-GameSchema.html">GameSchema</a></li><li><a href="module-models_User-UserSchema.html">UserSchema</a></li></ul>
+    <h2><a href="index.html">MERNshell</a></h2><h3>Modules</h3><ul><li><a href="module-client_src_App.html">client/src/App</a></li><li><a href="module-client_src_components_AppNavbar.html">client/src/components/AppNavbar</a></li><li><a href="module-client_src_components_LeaderBoardModal.html">client/src/components/LeaderBoardModal</a></li><li><a href="module-models_Game.html">models/Game</a></li><li><a href="module-models_User.html">models/User</a></li><li><a href="module-privateRoutesAuth.html">privateRoutesAuth</a></li><li><a href="module-routes_games.html">routes/games</a></li><li><a href="module-routes_users.html">routes/users</a></li><li><a href="module-server.html">server</a></li><li><a href="module-validation.html">validation</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-models_Game-GameSchema.html">GameSchema</a></li><li><a href="module-models_User-UserSchema.html">UserSchema</a></li><li><a href="module-validation-loginValidation.html">loginValidation</a></li><li><a href="module-validation-registerValidation.html">registerValidation</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu Jun 04 2020 06:53:21 GMT-0500 (Central Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu Jun 04 2020 11:21:29 GMT-0500 (Central Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

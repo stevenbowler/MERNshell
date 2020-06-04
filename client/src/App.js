@@ -1,5 +1,10 @@
 //@ts-check --jsx
-/**@module  */
+/**@module  
+ * @requires react
+ * @requires bootstrap
+ * @requires axios
+ * @requires reactstrap
+*/
 
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -55,14 +60,20 @@ class App extends React.Component {
 
   // STATE HANDLERS and related support functions FROM COMPONENTS
 
-  // handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
+  /**
+   * handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
+   * @function handleToggleNavbar
+   */
   handleToggleNavbar = () => {
     this.setState({ isOpenNavBar: !this.state.isOpenNavBar });
     if (this.state.isOpenNavBar) this.setState({ gameOn: false });
   }
 
 
-  // handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
+  /**
+   * handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
+   * @function handleToggleLeaderBoardModal
+   */
   handleToggleLeaderBoardModal = (userBestScore) => {
     // console.log("handleToggleLeaderBoard userBestScore:", userBestScore);
     if (userBestScore > this.state.finalScore) this.setState({ finalScore: userBestScore });
@@ -72,7 +83,11 @@ class App extends React.Component {
   }
 
 
-  // handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
+
+  /**
+   * handle state.isOpenNavBar toggle for ReactStrap AppNavBar
+   * @function handleToggleLoginRegisterModal
+   */
   handleToggleLoginRegisterModal = () => {
     this.setState({ isOpenRegisterModal: !this.state.isOpenRegisterModal });
     this.setState({ isOpenLoginModal: false });
@@ -80,15 +95,30 @@ class App extends React.Component {
   }
 
 
-  // handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
+  /**
+   * handle state.isOpenNavBar toggle for ReactStrap AppNavBar 
+   * @function
+  */
   handleToggleLoginModal = () => {
     this.setState({ isOpenRegisterModal: !this.state.isOpenRegisterModal });
     this.setState({ isOpenLeaderBoardModal: false });
     this.setState({ isOpenLoginModal: !this.state.isOpenLoginModal });
   }
 
+  /**
+   * this is object with registration data
+   * @typedef {object} data
+   * @property {string} name - 8+ digit user name regex alpha-numeric
+   * @property {string} email - email format string
+   * @property {string} password - minimum 8 digit password regex alpha-numeric
+   * 
+  */
 
-  // called from LoginRegisterModals component to handle registration request attribute changes
+  /**
+   * called from LoginRegisterModals component to handle registration request attribute changes
+   * @function handleRegister
+   * @param {data} data 
+   * */
   handleRegister = (data) => {
     // console.log("App.js handleRegister input name: " + data.name + "email: " + data.email + "password: " + data.password);
     var finishRegister = () => {
@@ -115,7 +145,10 @@ class App extends React.Component {
       ;
   }
 
-
+  /**
+   * @function handleLogin
+   * @param {data} data
+   */
   handleLogin = (data) => {
     var tokenHandleLogin = "";
     var nameHandleLogin = "";
@@ -158,7 +191,10 @@ class App extends React.Component {
       });
   }
 
-
+  /**
+   * handle the logout event
+   * @function handleLogout
+   */
   handleLogout = () => {
     console.log(`logout: ${this.state.name}`);
     this.token = "";
@@ -166,30 +202,31 @@ class App extends React.Component {
     this.password = "";
     this.setState({ name: "Logged out" });
     this.setState({ loggedIn: false });
-    // this.setState({ finalScore: 0 });
-    // this.setState({ finalLevel: 0 });
   }
 
 
-
+  /**
+   * handle the Changecolor event from Navbar
+   * @function handleChangeColor
+   */
   handleChangeColor = () => {
     console.log("changeColor");
     var randomRed = Math.floor(Math.random() * 255);
     var randomGreen = Math.floor(Math.random() * 255);
     var randomBlue = Math.floor(Math.random() * 255);
     console.log(randomGreen);
-    // document.body.style = `transition: background-color 10s;`
-    // document.body.style = `background: green;`;
     //@ts-ignore
     document.body.style = `background-color: rgb(${randomRed}, ${randomGreen}, ${randomBlue});`;
     this.setState({ backgroundColor: `rgb(${randomRed}, ${randomGreen}, ${randomBlue})` });
   }
 
-
+  /**
+   * handle the Tutorial button event, play the tutorial for this app
+   * @function handleTutorial
+   */
   handleTutorial = () => {
     console.log("handleTutorial");
     window.location.href = "https://drive.google.com/file/d/1JP_OVqQBgVvdr6Cqqd9xBg2_fPOLpMeB/view";
-    // https://drive.google.com/file/d/1JP_OVqQBgVvdr6Cqqd9xBg2_fPOLpMeB/view
   }
 
 
