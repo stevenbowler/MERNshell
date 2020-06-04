@@ -1,3 +1,13 @@
+//@ts-nocheck
+/**@module
+ * @requires express
+ * @requires router
+ * @requires bcryptjs
+ * @requires jwt
+ * @requires Game
+ * @requires verify
+ */
+
 const express = require('express');
 const router = express();
 const User = require('../models/User');
@@ -7,7 +17,15 @@ const jwt = require('jsonwebtoken');
 const verify = require('../privateRoutesAuth');
 
 
-//Register a new user
+
+/**
+ * Register a new user
+ * @function
+ * @name post/register
+ * @memberof module:routes/users
+ * @param {string} path - /register
+ * @returns {object}
+ */
 router.post('/register', async (req, res) => {
     // validate before creating user
     const { error } = registerValidation(req.body);
@@ -39,6 +57,14 @@ router.post('/register', async (req, res) => {
 
 
 //Login a user
+/**
+ * Register a new user
+ * @function
+ * @name post/login
+ * @memberof module:routes/users
+ * @param {string} path - /login
+ * @returns {object}
+ */
 router.post('/login', async (req, res) => {
     // validate login data before logging-in user
     const { error } = loginValidation(req.body);
@@ -57,10 +83,6 @@ router.post('/login', async (req, res) => {
     console.log("login route token: " + token + " user: " + user);
     res.header('auth-token', token).send({ "token": token, "user": user });
 
-    //res.send(user.name + ' logged in');
-
-
-
 });
 
 
@@ -77,7 +99,7 @@ router.get('/', verify, async (req, res) => {
 
 
 
-/// get genre from Vidly is example of params
+/// get genre/:genreID is example route and parses params
 router.get('/genre/:genreID', async (req, res) => {
     try {
         const users = await User.find({ genre: req.params.genreID });
@@ -119,7 +141,6 @@ router.patch('/:postId', async (req, res) => {
         const updatedPost = await Post.updateOne(
             { _id: req.params.postId },
             { $set: { title: req.body.title } },
-            //{ $addFields: { genre: req.body.genre } }
         );
         res.json(updatedPost);
     } catch (err) {

@@ -7,6 +7,7 @@
   "description": "MERN app with JWT, bcrypt and hapi/joi validation deployed to heroku",
   "main": "server.js",
   "scripts": {
+    "doc": "jsdoc -c jsdoc.json -R README.md",
     "client-install": "npm install --prefix client",
     "build": "react-scripts build",
     "start": "node server.js",
@@ -25,6 +26,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsdoc": "^3.6.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.4"
   },

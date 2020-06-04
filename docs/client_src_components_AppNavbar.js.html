@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: client/src/components/AppNavbar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: client/src/components/AppNavbar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//@ts-check
+/**@module */
+import React, { Component } from 'react';
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    NavbarText,
+    Nav,
+    NavItem,
+    NavLink,
+    Container,
+    Button
+} from 'reactstrap';
+
+
+
+class AppNavbar extends Component {
+
+    toggleModal = () => this.modal = !this.modal;
+    registerInput = () => this.toggleModal();
+    toggle = () => this.props.onToggle();
+    register = () => this.props.onRegister();
+    login = () => this.props.onLogin();
+    logout = () => this.props.onLogout();
+    leaderBoard = () => this.props.onLeaderBoard();
+    tutorial = () => this.props.onTutorial();
+    unused = () => this.props.unused();
+    changeColor = () => this.props.onChangeColor();
+
+    render() {
+        return (
+            &lt;div>
+                &lt;Navbar color="dark" expand="sm" className="mb-5">
+                    &lt;Container>
+                        &lt;NavbarBrand href="/">MERNshell&lt;/NavbarBrand>
+                        &lt;NavbarText className="text-warning" placeholder="test">{this.props.name}&lt;/ NavbarText>
+                        &lt;NavbarToggler color="dark" border="dark" onClick={this.toggle}>&lt;img src='hamburger.jpg' alt='Menu' style={{
+                            height: "40px",
+                            width: "40px"
+                        }}>&lt;/img>&lt;/NavbarToggler>
+                        &lt;Collapse isOpen={this.props.isOpen} navbar>
+                            &lt;Nav className="ml-auto" navbar>
+                                &lt;Button hidden={this.props.loggedIn ? true : false} float="left" display="inline" onClick={this.register}>Register&lt;/Button>
+                                &lt;Button hidden={this.props.loggedIn ? true : false} float="left" display="inline" onClick={this.login}>Login&lt;/Button>
+                                &lt;Button hidden={this.props.loggedIn ? false : true} float="left" display="inline" onClick={this.logout}>Logout&lt;/Button>
+                                &lt;Button hidden={this.props.loggedIn ? false : true} float="left" display="inline" onClick={this.leaderBoard}>Modal&lt;/Button>
+                                &lt;Button hidden={this.props.loggedIn ? true : false} float="left" display="inline" onClick={this.tutorial}>Tutorial&lt;/Button>
+                                {/* &lt;Button float="left" display="inline" onClick={this.unused}>Unused&lt;/Button> */}
+                                &lt;Button float="left" type="color" display="inline" onClick={this.changeColor}>Color&lt;/Button>
+                                &lt;NavItem>
+                                    &lt;NavLink display="inline" color="white" href="https://github.com/stevenbowler/MERNshell">GitHub&lt;/NavLink>
+                                &lt;/NavItem>
+                            &lt;/Nav>
+                        &lt;/Collapse>
+                    &lt;/Container>
+
+                &lt;/Navbar>
+
+            &lt;/div >
+        );
+    }
+
+}
+
+export default AppNavbar;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">MERNshell</a></h2><h3>Modules</h3><ul><li><a href="module-client_src_App.html">client/src/App</a></li><li><a href="module-client_src_components_AppNavbar.html">client/src/components/AppNavbar</a></li><li><a href="module-client_src_components_Box_index.html">client/src/components/Box/index</a></li><li><a href="module-client_src_components_LeaderBoardModal.html">client/src/components/LeaderBoardModal</a></li><li><a href="module-client_src_components_Photo_index.html">client/src/components/Photo/index</a></li><li><a href="module-models_Game.html">models/Game</a></li><li><a href="module-models_User.html">models/User</a></li><li><a href="module-privateRoutesAuth.html">privateRoutesAuth</a></li><li><a href="module-routes_games.html">routes/games</a></li><li><a href="module-routes_users.html">routes/users</a></li><li><a href="module-server.html">server</a></li><li><a href="module-validation.html">validation</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-models_Game-GameSchema.html">GameSchema</a></li><li><a href="module-models_User-UserSchema.html">UserSchema</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu Jun 04 2020 06:53:21 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

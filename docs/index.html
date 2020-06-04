@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: MERNshell</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">MERNshell</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>MERNshell</h1>
+<p>Full Stack MERN shell with login validation, password encryption and JSON web token protection ready to go.  Copy in ReactJS app into client/src directory, then set props to link up navbar and client/App.js functions to your containers.</p>
+<h3>Overview</h3>
+<p>The MERNshell enables the coder/team to focus on their app while providing register/login capability complete with input validation, password encryption and private routes protection with JSON Web Tokens.</p>
+<p>This project has afforded this programmer the opportunity to gain experience in development of full stack MERN apps including various technologies.  The Packages used include: <a href="https://www.npmjs.com/package/@hapi/joi">@hapi/joi</a>, <a href="https://www.npmjs.com/package/bcryptjs">bcryptjs</a>, <a href="https://www.npmjs.com/package/body-parser">body-parser</a>, <a href="https://www.npmjs.com/package/concurrently">concurrently</a>, <a href="https://www.npmjs.com/package/cors">cors</a>, <a href="https://www.npmjs.com/package/dotenv">dotenv</a>, <a href="https://www.npmjs.com/package/express">express</a>, <a href="https://www.npmjs.com/package/jsonwebtoken">jsonwebtoken</a>, <a href="https://www.npmjs.com/package/mongoose">mongoose</a>.</p>
+<h3>User Documentation</h3>
+<p>First, watch the video tutorial by clicking <a href="https://drive.google.com/file/d/1JP_OVqQBgVvdr6Cqqd9xBg2_fPOLpMeB/view">this link</a>.</p>
+<p>Then see example MERNshell deployed by <a href="https://mernshell.herokuapp.com/">clicking here</a>.</p>
+<p>See another example of app fully deployed <a href="https://secure-citadel-76923.herokuapp.com/">clicking here</a>.</p>
+<h3>Program Documentation</h3>
+<p>See <a href="https://stevenbowler.github.io/MERNshell/docs/index.html">program documentation</a> in JSDOC format.</p>
+<p>Link to the repository <a href="https://github.com/stevenbowler/MERNshell/">here</a>.</p>
+<p>Requires <a href="https://www.npmjs.com/package/dotenv">dotenv</a> to be installed and a <code>.env</code> file must be stored in the root directory for the app.  The <code>.env</code> file must contain the app owner's MongoDB URL with embedded username and password.  <em><em>To use the same user database in development, testing and production then, it is critically important that the TOKEN_SECRET shown below be exactly the same string.</em></em></p>
+<pre class="prettyprint source"><code>DB_CONNECTION=your_mongodb_url_with_embedded_username_password
+TOKEN_SECRET = any_random_string_but_always_use_same_string
+</code></pre>
+<p>To deploy to Heroku then following <code>git push heroku master</code> command, and before accessing the app page, will be necesary to set the two environmental variables with these commands from the Heroku CLI:</p>
+<pre class="prettyprint source"><code>heroku config:set --app=mernshell DB_CONNECTION=your_mongodb_url_with_embedded_username_password
+heroku config:set --app=mernshell TOKEN_SECRET=any_random_string_but_always_use_same_string
+</code></pre>
+<h2>Available Scripts</h2>
+<p><a href="https://youtu.be/GgNcs9zlFSA?list=PLOFmg4xbN_TPrB6w4rThsFanVxJI_SfER">Connect Repo with Heroku Video</a></p>
+<p>Program is deployed to <a href="https://www.heroku.com">Heroku</a>.  Program uses <a href="https://www.npmjs.com/package/concurrently">concurrently</a>, so locally runs server on port 5000 and react app on port 3000.</p>
+<p>This project was bootstrapped with <a href="https://github.com/facebook/create-react-app">Create React App</a>.</p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">MERNshell</a></h2><h3>Modules</h3><ul><li><a href="module-client_src_App.html">client/src/App</a></li><li><a href="module-client_src_components_AppNavbar.html">client/src/components/AppNavbar</a></li><li><a href="module-client_src_components_Box_index.html">client/src/components/Box/index</a></li><li><a href="module-client_src_components_LeaderBoardModal.html">client/src/components/LeaderBoardModal</a></li><li><a href="module-client_src_components_Photo_index.html">client/src/components/Photo/index</a></li><li><a href="module-models_Game.html">models/Game</a></li><li><a href="module-models_User.html">models/User</a></li><li><a href="module-privateRoutesAuth.html">privateRoutesAuth</a></li><li><a href="module-routes_games.html">routes/games</a></li><li><a href="module-routes_users.html">routes/users</a></li><li><a href="module-server.html">server</a></li><li><a href="module-validation.html">validation</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-models_Game-GameSchema.html">GameSchema</a></li><li><a href="module-models_User-UserSchema.html">UserSchema</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Thu Jun 04 2020 06:53:21 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,3 +1,8 @@
+//@ts-nocheck
+/**@module
+ * @requires Joi
+ */
+
 const Joi = require('@hapi/joi');
 
 const registerValidation = data => {

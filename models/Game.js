@@ -1,5 +1,10 @@
+//@ts-check
+/**@module
+ * @requires mongoose
+ */
 const mongoose = require('mongoose');
 
+/**@namespace */
 const GameSchema = mongoose.Schema({
     name: {
         type: String,

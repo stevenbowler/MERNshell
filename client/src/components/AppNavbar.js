@@ -1,3 +1,5 @@
+//@ts-check
+/**@module */
 import React, { Component } from 'react';
 import {
     Collapse,
@@ -43,7 +45,7 @@ class AppNavbar extends Component {
                                 <Button hidden={this.props.loggedIn ? true : false} float="left" display="inline" onClick={this.register}>Register</Button>
                                 <Button hidden={this.props.loggedIn ? true : false} float="left" display="inline" onClick={this.login}>Login</Button>
                                 <Button hidden={this.props.loggedIn ? false : true} float="left" display="inline" onClick={this.logout}>Logout</Button>
-                                <Button hidden={this.props.loggedIn ? false : true} float="left" display="inline" onClick={this.leaderBoard}>Leader Board</Button>
+                                <Button hidden={this.props.loggedIn ? false : true} float="left" display="inline" onClick={this.leaderBoard}>Modal</Button>
                                 <Button hidden={this.props.loggedIn ? true : false} float="left" display="inline" onClick={this.tutorial}>Tutorial</Button>
                                 {/* <Button float="left" display="inline" onClick={this.unused}>Unused</Button> */}
                                 <Button float="left" type="color" display="inline" onClick={this.changeColor}>Color</Button>
