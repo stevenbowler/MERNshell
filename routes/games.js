@@ -24,7 +24,15 @@ router.get('/', verify, async (req, res) => {
 });
 
 
-// get top 2 scores games sorted in descending order, including handle query .sort({score, -1})
+// 
+/**
+ * get top 5 scores games sorted in descending order, including handle query .sort({score, -1})
+ * @function
+ * @name get/leaders
+ * @memberof module:routes/games
+ * @param {string} path - / to get you home.
+ * @returns {URL} Returns url to index.handlebars
+ */
 router.get('/leaders', verify, async (req, res) => {
     try {
         const games = await Game.find(req.query).sort({ score: -1 }).limit(5);  // will handle query ..api/movies?genre=horror etc
@@ -36,6 +44,14 @@ router.get('/leaders', verify, async (req, res) => {
 
 
 // get top 2 scores games sorted in descending order, including handle query .sort({score, -1})
+/**
+ * get top score for this player, including handle query .sort({score, -1})
+ * @function
+ * @name get/leaders
+ * @memberof module:routes/games
+ * @param {string} path - / to get you home.
+ * @returns {URL} Returns url to index.handlebars
+ */
 router.get('/best', verify, async (req, res) => {
     try {
         const games = await Game.find(req.query).sort({ score: -1 }).limit(1);  // will handle query ..api/movies?genre=horror etc
@@ -47,6 +63,14 @@ router.get('/best', verify, async (req, res) => {
 
 
 // get all games listed including handle query
+/**
+ * get top score for this player, including handle query .sort({score, -1})
+ * @function
+ * @name get/leaders
+ * @memberof module:routes/games
+ * @param {string} path - / to get you home.
+ * @returns {URL} Returns url to index.handlebars
+ */
 router.post('/personalbest', verify, async (req, res) => {
     console.log("personalbest req.body: " + req.body);
     console.log("personalbest req.body.email: " + req.body.email);
@@ -73,8 +97,16 @@ router.get('/email/:emailID', verify, async (req, res) => {
 // header: { "auth-token": req.headers.token },
 
 //submit a new game result to game DB
+/**
+ * Post this score for this player, including handle query .sort({score, -1})
+ * @function
+ * @name post/postscore
+ * @memberof module:routes/games
+ * @param {string} path - / to get you home.
+ * @returns {URL} Returns url to index.handlebars
+ */
 router.post('/postscore', verify, async (req, res) => {
-    console.log("postGameScore Email: " + req.body.email + " score: " + req.body.score + "req.body.name: " + req.body.name);
+    // console.log("postGameScore Email: " + req.body.email + " score: " + req.body.score + "req.body.name: " + req.body.name);
     const game = new Game({
         name: req.body.name,
         email: req.body.email,

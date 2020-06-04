@@ -43,6 +43,10 @@ class LeaderBoardModal extends Component {
 
     }
 
+    /**
+     * If logged-in and previousScore <= currentScore then update leaders data and user personal best data
+     * @function componentDidUpdate
+     */
     componentDidUpdate() {
         //console.log("previous score: ", this.previousScore, "   this score: ", this.props.score, "  this level: ", this.props.level);
         if (this.props.loggedIn &&
@@ -56,6 +60,10 @@ class LeaderBoardModal extends Component {
         }
     }
 
+    /**
+     * Called from {@link componentDidUpdate}, get this users best score from MongoDB
+     * @function getUserPersonalBest
+     */
     getUserPersonalBest = () => {
         var temp;
         // console.log("typeof temp: ", typeof temp);
@@ -69,7 +77,6 @@ class LeaderBoardModal extends Component {
         }
         const logout = () => this.logout();
         var path = '/api/games/best?email=' + this.props.email;
-        // console.log("path:  ", path);
 
         axios
             .get(
@@ -79,7 +86,6 @@ class LeaderBoardModal extends Component {
                 })
             .then(function (response) {
                 if (response.data.length !== 0) {            // need to handle when empty array returned
-                    // console.log("response: ", response);
                     temp = response;
                     // console.log("temp: ", temp);
                 }    //save response to raise it up in temp
@@ -88,18 +94,18 @@ class LeaderBoardModal extends Component {
                     // console.log("temp.data[0] ", temp.data[0].score);
                 }
                 setLeaderBoardUserBest();   // set userBest to raise them up to component level
-
             })
             .catch(function (error) {
                 console.log("Steve Output, could not getUserStats from LeaderBoardModal.js: " + error.message);
                 if (loggedIn) logout();
-
             })
-
             ;
-
     }
 
+    /**
+     * Called from {@link componentDidUpdate} to get top 5 scores
+     * @function getLeadersData
+     */
     getLeadersData = () => {
         //console.log("App.js handleBestUpdate input name: " + data.name + "email: " + data.email + "password: " + data.password);
         var leaderArray = "";
@@ -133,6 +139,7 @@ class LeaderBoardModal extends Component {
                 })
             .then(function (response) {
                 // console.log("get leaders line 129", response);
+                //@ts-ignore
                 leaderArray = response;
                 // console.log("get leaders line 129 leaderArray", leaderArray);
                 setLeaderBoard();
@@ -145,6 +152,10 @@ class LeaderBoardModal extends Component {
     }
 
 
+
+    /**
+     * Called from {@link componentDidUpdate}, when game just completed, load new score to MongoDB
+     */
     postThisScore = () => {
         //console.log("LeaderBoardModal.js postThisScore this.props.token: " + this.props.token + " data email: " + this.props.email);
         const loggedIn = this.props.loggedIn;
@@ -179,11 +190,18 @@ class LeaderBoardModal extends Component {
 
 
 
-
+    /**
+     * Onclick Cancel button event, trigger onCancle and handleCancel in App.js
+     * @function cancel
+     */
     cancel = () => {
         this.props.onCancel(this.userBestScore);
     }
 
+    /**
+     * Called when invalid attempt, timed-out JWT, to access MongoDB
+     * @function logout
+     */
     logout = () => this.props.onLogout();
 
     render() {
